@@ -9,8 +9,9 @@ Secrets are encrypted using [SOPS](https://github.com/mozilla/sops) and [age](ht
 ├── flake.lock
 ├── flake.nix
 ├── hive.nix     # contains the definition of all our machines
-├── hosts        # contains our host-specific configuration (hostname, network, etc.)
 ├── common       # contains our common configurations and users
+├── hosts        # contains our host-specific configuration (hostname, network, etc.)
+├── profiles     # contains our profiles that we apply on hosts
 ```
 
 ## Preparations

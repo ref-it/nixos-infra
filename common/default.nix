@@ -6,6 +6,8 @@
 
     ./base-options.nix
     ./users.nix
+
+    ../profiles
   ];
 
   config = {

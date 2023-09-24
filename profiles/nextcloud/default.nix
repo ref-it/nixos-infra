@@ -49,13 +49,18 @@ in
       }];
     };
 
-    sops.secrets = lib.genAttrs
-      [ "nc-init-pw" ]
-      (_: {
+    sops.secrets = {
+      "nc-init-pw" = {
         owner = "nextcloud";
         group = "nextcloud";
         mode = "0400";
-      });
+      };
+      "borg-passphrase" = {
+        owner = "root";
+        group = "root";
+        mode = "0400";
+      };
+    };
 
     services.nextcloud = {
       enable = true;
@@ -79,6 +84,29 @@ in
         adminpassFile = config.sops.secrets."nc-init-pw".path;
         dbhost = "localhost:/run/mysqld/mysqld.sock";
       };
+    };
+
+    services.borgbackup.jobs.nextcloud = {
+      user = "root";
+      group = "root";
+      repo = "ssh://backup:23/./cloud";
+      readWritePaths = [ "/var/lib/nextcloud/db-backup" ];
+      preHook = ''
+        cd /var/lib/nextcloud
+
+        rm -f db-backup/*
+
+        ${pkgs.mariadb}/bin/mysqldump ${config.services.nextcloud.config.dbname} > db-backup/${config.services.nextcloud.config.dbname}.sql
+      '';
+      paths = [ "config/config.php" "data" "db-backup" ];
+      doInit = false;
+      startAt = [ "*-*-* 04:00:00" ];
+      encryption.mode = "repokey";
+      encryption.passCommand = "cat ${config.sops.secrets."borg-passphrase".path}";
+      prune.keep.within = "1y";
+      compression = "auto,zstd";
+      dateFormat = "+%Y-%m-%d";
+      archiveBaseName = "backup";
     };
   };
 }

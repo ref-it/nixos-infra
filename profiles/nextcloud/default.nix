@@ -23,6 +23,14 @@ in
         Additional domains under which the Nextcloud shoud be reachable.
       '';
     };
+
+    trustedProxies = mkOption {
+      type = types.listOf types.str;
+      default = [];
+      description = mdDoc ''
+        Trusted proxies for the Nextcloud.
+      '';
+    };
   };
 
   config = mkIf cfg.enable {
@@ -63,7 +71,7 @@ in
       };
       config = {
         extraTrustedDomains = cfg.extraDomains;
-        trustedProxies = [ "10.170.20.101" ];
+        trustedProxies = cfg.trustedProxies;
         dbtype = "mysql";
         dbname = "nextcloud";
         dbuser = "nextcloud";

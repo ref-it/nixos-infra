@@ -25,6 +25,11 @@
       fsType = "btrfs";
     };
 
+  fileSystems."/var/lib/nextcloud" =
+    { device = "/dev/disk/by-uuid/cc77aeff-295a-482a-b9ad-9b37a016ec3c";
+      fsType = "btrfs";
+    };
+
   swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking

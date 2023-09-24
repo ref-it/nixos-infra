@@ -31,6 +31,9 @@ in
     services.mysql = {
       enable = true;
       package = pkgs.mariadb;
+      settings.mysqld = {
+        innodb_buffer_pool_size = "4096M";
+      };
       ensureDatabases = [ config.services.nextcloud.config.dbname ];
       ensureUsers = [{
         name = config.services.nextcloud.config.dbuser;
@@ -53,8 +56,14 @@ in
       hostName = cfg.fqdn;
       autoUpdateApps.enable = true;
       configureRedis = true;
+      maxUploadSize = "2048M";
+      phpOptions = {
+        "opcache.interned_strings_buffer" = "64";
+        "opcache.memory_consumption" = "1024";
+      };
       config = {
         extraTrustedDomains = cfg.extraDomains;
+        trustedProxies = [ "10.170.20.101" ];
         dbtype = "mysql";
         dbname = "nextcloud";
         dbuser = "nextcloud";

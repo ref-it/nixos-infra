@@ -17,11 +17,11 @@
     pkgs = nixpkgs.legacyPackages.${system};
   in {
     devShells.default = pkgs.mkShell {
-      name = "netali-nixfiles-shell";
+      name = "stura-nixfiles-shell";
       buildInputs = [
         pkgs.sops
         pkgs.colmena
-        pkgs.ssh-to-nix
+        pkgs.ssh-to-age
       ];
     };
   });

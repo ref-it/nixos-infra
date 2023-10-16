@@ -62,6 +62,8 @@ in
       };
     };
 
+    systemd.services.nextcloud-setup.after = [ "mysql.service" ];
+
     services.nextcloud = {
       enable = true;
       package = pkgs.nextcloud27;

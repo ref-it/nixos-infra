@@ -2,12 +2,19 @@ keys:
   - &admin_netali age1r72zngdkax447se4a357n78huc86veuddjvkd4zumgn787q7vcuqwlnmq7
   - &admin_schlagma age1ncc0ukuqyeq8uzcvy2x0cymykrmnhzymgk22kvt7dvz99prjsysqjxgz9g
   - &srv_obelix age1hcnc4xp69rwh8dhcvgdrykd45pm9qy6u7cvmda2nrkp934z38gashg8vr8
+  - &srv_majestix age1278dhwp6s0ssnggnzx7xq8rk33swc5fhv7gr36c780t06h34a9pq8jx5mw
 
 creation_rules:
   - path_regex: hosts/obelix/secrets.yaml$
     key_groups:
       - age:
         - *srv_obelix
+        - *admin_netali
+        - *admin_schlagma
+  - path_regex: hosts/majestix/secrets.yaml$
+    key_groups:
+      - age:
+        - *srv_majestix
         - *admin_netali
         - *admin_schlagma
 

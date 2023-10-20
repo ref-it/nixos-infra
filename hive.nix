@@ -16,4 +16,5 @@ inputs:
 
   # hosts
   obelix = ./hosts/obelix;
+  majestix = ./hosts/majestix;
 }

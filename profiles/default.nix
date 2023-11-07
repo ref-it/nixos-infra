@@ -3,6 +3,7 @@
 {
   imports = [
     ./nextcloud
+    ./zammad
     ./zitadel
   ];
 }

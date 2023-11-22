@@ -51,7 +51,7 @@
       enable = true;
       fqdn = "cloud.stura.eu";
       extraDomains = [ "cloud.stura-ilmenau.de" ];
-      trustedProxies = [ "10.170.20.101" ];
+      trustedProxies = [ "10.170.20.105" ];
     };
   };
 }

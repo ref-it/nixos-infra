@@ -18,4 +18,5 @@ inputs:
   majestix = ./hosts/majestix;
   miraculix = ./hosts/miraculix;
   obelix = ./hosts/obelix;
+  rohrpostix = ./hosts/rohrpostix;
 }

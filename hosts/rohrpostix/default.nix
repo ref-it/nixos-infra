@@ -92,7 +92,7 @@
           websocket = {
             enable = true;
             target = "http://10.170.20.104:6042";
-            locations = [ "/ws" ];
+            locations = [ "/ws" "/cable" ];
           };
         }
       ];

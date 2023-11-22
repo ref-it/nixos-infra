@@ -40,6 +40,8 @@
 
     security.sudo.wheelNeedsPassword = false;
 
+    services.qemuGuest.enable = true;
+
     environment.systemPackages = with pkgs; [
       htop
       tmux

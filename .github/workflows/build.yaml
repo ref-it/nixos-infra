@@ -1,7 +1,7 @@
 name: "Colmena build"
 on: [push]
 jobs:
-  check-eval-flake:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

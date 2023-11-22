@@ -24,6 +24,35 @@ in
             type = types.str;
             description = "Target of the reverse proxy.";
           };
+          extraConfig = mkOption {
+            type = types.lines;
+            default = "";
+            description = ''
+              Extra config for the nginx location of the proxy.
+            '';
+          };
+          websocket = {
+            enable = mkOption {
+              type = types.bool;
+              default = false;
+              description = ''
+                Enable websocket proxying.
+              '';
+            };
+            target = mkOption {
+              type = types.nullOr types.str;
+              default = null;
+              description = ''
+                Proxy target for the websocket.
+              '';
+            };
+            locations = mkOption {
+              type = types.listOf types.str;
+              description = ''
+                Locations to forward to the websocket.
+              '';
+            };
+          };
         };
       });
     };
@@ -71,18 +100,32 @@ in
       virtualHosts = listToAttrs (builtins.map (x: let
         serverName = builtins.head x.sources;
         aliases = drop 1 x.sources;
+        websocketLocations = listToAttrs (builtins.map (y: {
+          name = y;
+          value = {
+            proxyPass = if x.websocket.target != null then x.websocket.target else x.target;
+            extraConfig = ''
+              proxy_ssl_verify off;
+              proxy_http_version 1.1;
+              proxy_set_header Upgrade $http_upgrade;
+              proxy_set_header Connection "Upgrade";
+            '' + x.extraConfig;
+          };
+        }) x.websocket.locations);
       in {
         name = serverName;
         value = {
           serverAliases = aliases;
           enableACME = true;
           forceSSL = true;
-          locations."/" = {
-            proxyPass = x.target;
-            extraConfig = ''
-              proxy_ssl_verify off;
-            '';
-          };
+          locations = {
+            "/" = {
+              proxyPass = x.target;
+              extraConfig = ''
+                proxy_ssl_verify off;
+              '' + x.extraConfig;
+            };
+          } // (if x.websocket.enable then websocketLocations else {});
           extraConfig = ''
             client_max_body_size 512M;
           '';

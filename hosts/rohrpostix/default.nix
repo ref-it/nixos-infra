@@ -81,6 +81,20 @@
           ];
           target = "http://10.170.20.103";
         }
+        {
+          sources = [
+            "help.stura-ilmenau.de"
+          ];
+          target = "http://10.170.20.104:3000";
+          extraConfig = ''
+            proxy_set_header CLIENT_IP $remote_addr;
+          '';
+          websocket = {
+            enable = true;
+            target = "http://10.170.20.104:6042";
+            locations = [ "/ws" ];
+          };
+        }
       ];
       streamProxy = [
         {

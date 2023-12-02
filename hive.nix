@@ -15,7 +15,6 @@ inputs:
   defaults = ./common;
 
   # hosts
-  majestix = ./hosts/majestix;
   miraculix = ./hosts/miraculix;
   obelix = ./hosts/obelix;
   rohrpostix = ./hosts/rohrpostix;

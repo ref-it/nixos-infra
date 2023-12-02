@@ -40,6 +40,13 @@
 
     security.sudo.wheelNeedsPassword = false;
 
+    system.autoUpgrade = {
+      enable = true;
+      allowReboot = true;
+      flake = "github:Ref-IT/nixos-infra";
+      dates = "02:00";
+    };
+
     services.qemuGuest.enable = true;
 
     environment.systemPackages = with pkgs; [

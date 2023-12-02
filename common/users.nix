@@ -10,7 +10,7 @@
   users.users.netali = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOV4f3/OcNQIHqomvH0nGLDmXDlrO/u7JKE9Fgq2Vuqs me@netali.de" ];
+    openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPqnMKa8BZmbRM2Oc4E8N9h9N26ABPLgPTketLNSK7l7 me@netali.de" ];
   };
 
   users.users.schlagma = {

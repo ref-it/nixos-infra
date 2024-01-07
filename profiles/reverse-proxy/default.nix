@@ -9,6 +9,14 @@ in
   options.profiles.reverse-proxy = {
     enable = mkEnableOption "reverse-proxy";
 
+    allowedIPs = mkOption {
+      type = types.listOf types.str;
+      default = [];
+      description = ''
+        List of IP addresses that can access restricted locations.
+      '';
+    };
+
     httpProxy = mkOption {
       description = "HTTP proxy configs";
       type = types.listOf (types.submodule {
@@ -29,6 +37,21 @@ in
             default = "";
             description = ''
               Extra config for the nginx location of the proxy.
+            '';
+          };
+          unrestrictedLocations = mkOption {
+            type = types.nullOr (types.listOf types.str);
+            default = null;
+            description = ''
+              Explicit forwarded unrestricted locations.
+              If set, only the given locations will be proxied.
+            '';
+          };
+          restrictedLocations = mkOption {
+            type = types.listOf types.str;
+            default = [];
+            description = ''
+              Locations with IP limitations to StuRa IPs.
             '';
           };
           websocket = {
@@ -100,6 +123,26 @@ in
       virtualHosts = listToAttrs (builtins.map (x: let
         serverName = builtins.head x.sources;
         aliases = drop 1 x.sources;
+        unrestrictedLocations = if (x.unrestrictedLocations != null) then (listToAttrs (builtins.map (y: {
+          name = y;
+          value = {
+            proxyPass = x.target;
+            extraConfig = ''
+              proxy_ssl_verify off;
+            '' + x.extraConfig;
+          };
+        }) x.unrestrictedLocations)) else null;
+        restrictedLocations = listToAttrs (builtins.map (y: {
+          name = y;
+          value = {
+            proxyPass = x.target;
+            extraConfig = ''
+              proxy_ssl_verify off;
+              ${concatStringsSep "\n" (builtins.map (z: "allow " + z + ";") cfg.allowedIPs)}
+              deny all;
+            '' + x.extraConfig;
+          };
+        }) x.restrictedLocations);
         websocketLocations = listToAttrs (builtins.map (y: {
           name = y;
           value = {
@@ -118,14 +161,16 @@ in
           serverAliases = aliases;
           enableACME = true;
           forceSSL = true;
-          locations = {
+          locations = if (x.unrestrictedLocations == null) then {
             "/" = {
               proxyPass = x.target;
               extraConfig = ''
                 proxy_ssl_verify off;
               '' + x.extraConfig;
             };
-          } // (if x.websocket.enable then websocketLocations else {});
+          } else unrestrictedLocations
+          // restrictedLocations
+          // (if x.websocket.enable then websocketLocations else {});
           extraConfig = ''
             client_max_body_size 512M;
           '';

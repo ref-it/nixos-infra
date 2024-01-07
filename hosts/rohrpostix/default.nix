@@ -105,7 +105,7 @@
           sources = [
             "projects.stura-ilmenau.de"
           ];
-          target = "http://[2001:638:904:ffd0::14]:6000";
+          target = "http://[2001:638:904:ffd0::14]";
         }
       ];
       streamProxy = [

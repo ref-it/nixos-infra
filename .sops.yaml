@@ -1,14 +1,15 @@
 keys:
   - &admin_netali F72925946F580B058FB3F2719C55E636426B40A9
   - &admin_schlagma age1ncc0ukuqyeq8uzcvy2x0cymykrmnhzymgk22kvt7dvz99prjsysqjxgz9g
-  - &srv_obelix age1hcnc4xp69rwh8dhcvgdrykd45pm9qy6u7cvmda2nrkp934z38gashg8vr8
+  - &srv_majestix age1es4y3s8sh0c67u3zsj72cvvfwcnx9ty7482w22dj8ajvngnatdtqx0gfdt
   - &srv_miraculix age1j78d0nj0jr7xk5mmgwcepjm7zrj0nun9t8meht3qrq5ywqqqudhs6syp5v
+  - &srv_obelix age1hcnc4xp69rwh8dhcvgdrykd45pm9qy6u7cvmda2nrkp934z38gashg8vr8
 
 creation_rules:
-  - path_regex: hosts/obelix/secrets.yaml$
+  - path_regex: hosts/majestix/secrets.yaml$
     key_groups:
       - age:
-        - *srv_obelix
+        - *srv_majestix
         - *admin_schlagma
         pgp:
         - *admin_netali
@@ -16,6 +17,13 @@ creation_rules:
     key_groups:
       - age:
         - *srv_miraculix
+        - *admin_schlagma
+        pgp:
+        - *admin_netali
+  - path_regex: hosts/obelix/secrets.yaml$
+    key_groups:
+      - age:
+        - *srv_obelix
         - *admin_schlagma
         pgp:
         - *admin_netali

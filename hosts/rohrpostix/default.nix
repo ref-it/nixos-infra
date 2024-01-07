@@ -76,6 +76,12 @@
         }
         {
           sources = [
+            "auth.stura-ilmenau.de"
+          ];
+          target = "http://10.170.20.105";
+        }
+        {
+          sources = [
             "cloud.stura-ilmenau.de"
             "cloud.stura.eu"
           ];
@@ -94,6 +100,12 @@
             target = "http://10.170.20.104:6042";
             locations = [ "/ws" "/cable" ];
           };
+        }
+        {
+          sources = [
+            "projects.stura-ilmenau.de"
+          ];
+          target = "http://[2001:638:904:ffd0::14]:6000";
         }
       ];
       streamProxy = [

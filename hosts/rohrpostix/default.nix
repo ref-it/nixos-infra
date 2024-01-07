@@ -56,6 +56,10 @@
 
     profiles.reverse-proxy = {
       enable = true;
+      allowedIPs = [
+        "141.24.44.128/25"
+        "2001:638:904:ffd0::/64"
+      ];
       httpProxy = [
         {
           sources = [
@@ -78,7 +82,9 @@
           sources = [
             "auth.stura-ilmenau.de"
           ];
-          target = "http://10.170.20.105";
+          unrestrictedLocations = [ "/js" "/realms" "/resources" "/robots.txt" ];
+          restrictedLocations = [ "/admin" ];
+          target = "https://10.170.20.106";
         }
         {
           sources = [

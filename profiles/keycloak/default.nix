@@ -8,6 +8,13 @@ in
 {
   options.profiles.keycloak = {
     enable = mkEnableOption (mdDoc "Enable the Keycloak profile");
+
+    fqdn = mkOption {
+      type = types.str;
+      description = mdDoc ''
+        The FQDN of the Keycloak.
+      '';
+    };
   };
 
   config = mkIf cfg.enable {
@@ -19,6 +26,16 @@ in
         group = "root";
         mode = "0400";
       };
+      "tls-cert" = {
+        owner = "root";
+        group = "root";
+        mode = "0400";
+      };
+      "tls-cert-key" = {
+        owner = "root";
+        group = "root";
+        mode = "0400";
+      };
     };
 
     services.keycloak = {
@@ -26,9 +43,11 @@ in
       database = {
         passwordFile = config.sops.secrets."keycloak-db-pw".path;
       };
+      sslCertificate = config.sops.secrets."tls-cert".path;
+      sslCertificateKey = config.sops.secrets."tls-cert-key".path;
       settings = {
-        hostname = "auth.stura-ilmenau.de";
-        proxy = "edge";
+        hostname = cfg.fqdn;
+        proxy = "reencrypt";
       };
     };
   };

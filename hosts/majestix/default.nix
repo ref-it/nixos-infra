@@ -36,7 +36,7 @@
             IPv6AcceptRA = false;
           };
           address = [
-            "10.170.20.105/24"
+            "10.170.20.106/24"
           ];
           gateway = [
             "10.170.20.1"
@@ -49,6 +49,7 @@
 
     profiles.keycloak = {
       enable = true;
+      fqdn = "auth.stura-ilmenau.de";
     };
   };
 }

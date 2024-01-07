@@ -89,6 +89,13 @@
         }
         {
           sources = [
+            "helfer.stura-ilmenau.de"
+            "helfer.erstiwoche.de"
+          ];
+          target = "http://[2001:638:904:ffd0::d]";
+        }
+        {
+          sources = [
             "help.stura-ilmenau.de"
           ];
           target = "http://10.170.20.104:3000";

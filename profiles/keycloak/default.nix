@@ -14,9 +14,9 @@ in
     networking.firewall.allowedTCPPorts = [ 80 443 ];
 
     sops.secrets = {
-      "keycloak-init-pw" = {
-        owner = "keycloak";
-        group = "keycloak";
+      "keycloak-db-pw" = {
+        owner = "root";
+        group = "root";
         mode = "0400";
       };
     };
@@ -24,7 +24,7 @@ in
     services.keycloak = {
       enable = true;
       database = {
-        passwordFile = config.sops.secrets."keycloak-init-pw".path;
+        passwordFile = config.sops.secrets."keycloak-db-pw".path;
       };
       settings = {
         hostname = "auth.stura-ilmenau.de";

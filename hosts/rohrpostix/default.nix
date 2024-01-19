@@ -89,7 +89,6 @@
         {
           sources = [
             "cloud.stura-ilmenau.de"
-            "cloud.stura.eu"
           ];
           target = "http://10.170.20.103";
         }
@@ -98,7 +97,11 @@
             "helfer.stura-ilmenau.de"
             "helfer.erstiwoche.de"
           ];
-          target = "http://[2001:638:904:ffd0::d]";
+          target = "https://[2001:638:904:ffd0::d]";
+          extraConfig = ''
+            proxy_set_header X-Forwarded-For $remote_addr;
+            proxy_set_header X-Forwarded-Proto $scheme;
+          '';
         }
         {
           sources = [

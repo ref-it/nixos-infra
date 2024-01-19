@@ -89,6 +89,7 @@
         {
           sources = [
             "cloud.stura-ilmenau.de"
+            "cloud.stura.eu"
           ];
           target = "http://10.170.20.103";
         }

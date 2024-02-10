@@ -63,23 +63,6 @@
       httpProxy = [
         {
           sources = [
-            "stura.tu-ilmenau.de"
-            "www.stura.tu-ilmenau.de"
-            "erstiwoche.de"
-            "www.erstiwoche.de"
-            "fachschaftsrat-ei.de"
-            "www.fachschaftsrat-ei.de"
-            "fachschaftsrat-mn.de"
-            "www.fachschaftsrat-mn.de"
-            "fachschaftsrat-mb.de"
-            "www.fachschaftsrat-mb.de"
-            "fachschaftsrat-wm.de"
-            "www.fachschaftsrat-wm.de"
-          ];
-          target = "https://10.170.20.101";
-        }
-        {
-          sources = [
             "auth.stura-ilmenau.de"
           ];
           unrestrictedLocations = [ "/js" "/realms" "/resources" "/robots.txt" ];
@@ -89,7 +72,6 @@
         {
           sources = [
             "cloud.stura-ilmenau.de"
-            "cloud.stura.eu"
           ];
           target = "http://10.170.20.103";
         }
@@ -129,6 +111,21 @@
             "projects.stura-ilmenau.de"
           ];
           target = "http://[2001:638:904:ffd0::14]";
+        }
+      ];
+      redirectPermanent = [
+        {
+          sources = [
+            "stura.tu-ilmenau.de"
+            "www.stura.tu-ilmenau.de"
+          ];
+          target = "www.stura-ilmenau.de";
+        }
+        {
+          sources = [
+            "cloud.stura.eu"
+          ];
+          target = "cloud.stura-ilmenau.de";
         }
       ];
       streamProxy = [

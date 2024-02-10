@@ -101,6 +101,24 @@ in
         };
       });
     };
+    redirectPermanent = mkOption {
+      description = "Redirect Permanent configs";
+      type = types.listOf (types.submodule {
+        options = {
+          sources = mkOption {
+            type = types.listOf types.str;
+            description = ''
+              Domains for this redirect.
+              The first domain in the list will be used as the server name.
+            '';
+          };
+          target = mkOption {
+            type = types.str;
+            description = "Target of the redirect.";
+          };
+        };
+      });
+    };
   };
 
   config = mkIf cfg.enable {
@@ -175,7 +193,21 @@ in
             client_max_body_size 512M;
           '';
         };
-      }) cfg.httpProxy);
+      }) cfg.httpProxy
+      ++ builtins.map (x: let
+        serverName = builtins.head x.sources;
+        aliases = drop 1 x.sources;
+        target = x.target;
+      in {
+        name = serverName;
+        value = {
+          serverAliases = aliases;
+          enableACME = true;
+          forceSSL = true;
+          globalRedirect = target;
+        };
+      }
+      ) cfg.redirectPermanent);
     };
   };
 }

@@ -112,6 +112,12 @@
           ];
           target = "http://[2001:638:904:ffd0::14]";
         }
+        {
+          sources = [
+            "new.stura-ilmenau.de"
+          ];
+          target = "http://[2001:638:904:ffd0::16]";
+        }
       ];
       redirectPermanent = [
         {

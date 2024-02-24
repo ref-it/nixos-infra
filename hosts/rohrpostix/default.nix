@@ -133,6 +133,12 @@
           ];
           target = "cloud.stura-ilmenau.de";
         }
+        {
+          sources = [
+            "finanzen.stura.eu"
+          ];
+          target = "finanzen.stura-ilmenau.de";
+        }
       ];
       streamProxy = [
         {

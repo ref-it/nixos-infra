@@ -86,6 +86,9 @@ in
         adminpassFile = config.sops.secrets."nc-init-pw".path;
         dbhost = "localhost:/run/mysqld/mysqld.sock";
       };
+      extraOptions = {
+        maintenance_window_start = "2";
+      };
     };
 
     services.borgbackup.jobs.nextcloud = {

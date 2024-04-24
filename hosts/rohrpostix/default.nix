@@ -79,6 +79,10 @@
           sources = [
             "helfer.stura-ilmenau.de"
             "helfer.erstiwoche.de"
+            "helfer.fsr-ia.de"
+            "anmeldung.stura-ilmenau.de"
+            "anmeldung.erstiwoche.de"
+            "anmeldung.fsr-ia.de"
           ];
           target = "https://[2001:638:904:ffd0::d]";
           extraConfig = ''
@@ -99,6 +103,13 @@
             target = "http://10.170.20.104:6042";
             locations = [ "/ws" "/cable" ];
           };
+        }
+        {
+          sources = [
+            "mv.stura-ilmenau.de"
+          ];
+          restrictedLocations = [ "/" ];
+          target = "https://[2001:638:904:ffd0::17]";
         }
         {
           sources = [

@@ -106,13 +106,6 @@
         }
         {
           sources = [
-            "mv.stura-ilmenau.de"
-          ];
-          restrictedLocations = [ "/" ];
-          target = "https://[2001:638:904:ffd0::17]";
-        }
-        {
-          sources = [
             "onlyoffice.stura-ilmenau.de"
           ];
           target = "http://[2001:638:904:ffd0::11]";

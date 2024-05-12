@@ -106,6 +106,12 @@
         }
         {
           sources = [
+            "infoscreen.stura-ilmenau.de"
+          ];
+          target = "http://[2001:638:904:ffd0::20]";
+        }
+        {
+          sources = [
             "onlyoffice.stura-ilmenau.de"
           ];
           target = "http://[2001:638:904:ffd0::11]";

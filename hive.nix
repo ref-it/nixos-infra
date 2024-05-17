@@ -17,8 +17,8 @@ inputs:
   defaults = ./common;
 
   # hosts
-  automatix = ./hosts/automatix;
-  barometrix = ./hosts/barometrix;
+  # automatix = ./hosts/automatix;
+  # barometrix = ./hosts/barometrix;
   majestix = ./hosts/majestix;
   miraculix = ./hosts/miraculix;
   obelix = ./hosts/obelix;

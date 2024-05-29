@@ -76,18 +76,18 @@ in
         "opcache.interned_strings_buffer" = "64";
         "opcache.memory_consumption" = "1024";
       };
+      settings = {
+        trusted_domains = cfg.extraDomains;
+        maintenance_window_start = "2";
+        trusted_proxies = cfg.trustedProxies;
+      };
       config = {
-        extraTrustedDomains = cfg.extraDomains;
-        trustedProxies = cfg.trustedProxies;
         dbtype = "mysql";
         dbname = "nextcloud";
         dbuser = "nextcloud";
         adminuser = "admin";
         adminpassFile = config.sops.secrets."nc-init-pw".path;
         dbhost = "localhost:/run/mysqld/mysqld.sock";
-      };
-      extraOptions = {
-        maintenance_window_start = "2";
       };
     };
 

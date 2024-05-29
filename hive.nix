@@ -6,9 +6,7 @@ inputs:
 
     nixpkgs = import inputs.nixpkgs {
       system = "x86_64-linux";
-      overlays = [
-        (final: prev: { inherit (import inputs.nixpkgs-unstable { system = prev.system; }) zammad keycloak; })
-      ];
+      overlays = [];
     };
 
     specialArgs = { inherit inputs; };

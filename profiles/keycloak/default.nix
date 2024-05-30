@@ -18,7 +18,9 @@ in
   };
 
   config = mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = [ 80 443 ];
+    networking.firewall.extraInputRules = ''
+      ip saddr 10.170.20.0/24 tcp dport { 80, 443 } accept
+    '';
 
     sops.secrets = {
       "keycloak-db-pw" = {

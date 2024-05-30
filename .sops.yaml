@@ -4,6 +4,7 @@ keys:
   - &srv_majestix age1es4y3s8sh0c67u3zsj72cvvfwcnx9ty7482w22dj8ajvngnatdtqx0gfdt
   - &srv_miraculix age1j78d0nj0jr7xk5mmgwcepjm7zrj0nun9t8meht3qrq5ywqqqudhs6syp5v
   - &srv_obelix age1hcnc4xp69rwh8dhcvgdrykd45pm9qy6u7cvmda2nrkp934z38gashg8vr8
+  - &srv_troubadix age1k0njnn7z8l3j600hhaux5fu0hy2gulp9kj4crauvsxzswt0pcddsu8pcl4
 
 creation_rules:
   - path_regex: hosts/majestix/secrets.yaml$
@@ -24,6 +25,13 @@ creation_rules:
     key_groups:
       - age:
         - *srv_obelix
+        - *admin_schlagma
+        pgp:
+        - *admin_netali
+  - path_regex: hosts/troubadix/secrets.yaml$
+    key_groups:
+      - age:
+        - *srv_troubadix
         - *admin_schlagma
         pgp:
         - *admin_netali

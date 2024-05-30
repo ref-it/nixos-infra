@@ -21,4 +21,5 @@ inputs:
   miraculix = ./hosts/miraculix;
   obelix = ./hosts/obelix;
   rohrpostix = ./hosts/rohrpostix;
+  troubadix = ./hosts/troubadix;
 }

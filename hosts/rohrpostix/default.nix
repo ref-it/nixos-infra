@@ -54,6 +54,14 @@
       };
     };
 
+    services.nginx = {
+      virtualHosts."matrix-admin.stura.eu" = {
+        enableACME = true;
+        forceSSL = true;
+        locations."/".root = pkgs.synapse-admin;
+      };
+    };
+
     profiles.reverse-proxy = {
       enable = true;
       allowedIPs = [
@@ -109,6 +117,13 @@
             "infoscreen.stura-ilmenau.de"
           ];
           target = "http://[2001:638:904:ffd0::20]";
+        }
+        {
+          sources = [
+            "matrix.stura.eu"
+          ];
+          unrestrictedLocations = [ "~ ^(/_matrix|/_synapse/client|/_synapse/admin)" ];
+          target = "http://10.170.20.107:8008";
         }
         {
           sources = [

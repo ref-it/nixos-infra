@@ -80,6 +80,7 @@ in
         trusted_domains = cfg.extraDomains;
         maintenance_window_start = "2";
         trusted_proxies = cfg.trustedProxies;
+        default_phone_region = "DE";
       };
       config = {
         dbtype = "mysql";

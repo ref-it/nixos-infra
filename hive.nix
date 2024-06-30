@@ -17,6 +17,7 @@ inputs:
   # hosts
   # automatix = ./hosts/automatix;
   # barometrix = ./hosts/barometrix;
+  gutemine = ./hosts/gutemine;
   majestix = ./hosts/majestix;
   miraculix = ./hosts/miraculix;
   obelix = ./hosts/obelix;

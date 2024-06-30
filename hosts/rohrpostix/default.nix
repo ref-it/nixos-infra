@@ -155,6 +155,7 @@
         {
           sources = [
             "cloud.stura.eu"
+            "cloud.stura.tu-ilmenau.de"
           ];
           target = "cloud.stura-ilmenau.de";
         }

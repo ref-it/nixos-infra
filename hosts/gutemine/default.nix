@@ -39,5 +39,11 @@
       enable = true;
       fqdn = "ldap.stura-ilmenau.de";
     };
+
+    profiles.httpd-php = {
+      enable = true;
+      fqdn = "lam.stura-ilmenau.de";
+      restricted = true;
+    };
   };
 }

@@ -29,6 +29,14 @@ in
       '';
     };
 
+    sops.secrets = {
+      "openldap-pw" = {
+        owner = "openldap";
+        group = "openldap";
+        mode = "0400";
+      };
+    };
+
     services.openldap = {
       enable = true;
 
@@ -67,6 +75,9 @@ in
               olcDbDirectory = "/var/lib/openldap/data";
 
               olcSuffix = "dc=stura-ilmenau,dc=de";
+
+              olcRootDN = "cn=admin,dc=stura-ilmenau,dc=de";
+              olcRootPW.path = config.sops.secrets."openldap-pw".path;
 
               olcAccess = [
                 /* custom access rules for userPassword attributes */

@@ -67,9 +67,23 @@ in
             "${pkgs.openldap}/etc/schema/dyngroup.ldif"
           ];
 
+          "cn=module{0}" = {
+            attrs = {
+              objectClass = [ "olcModuleList" ];
+              olcModuleLoad = [
+                "ppolicy"
+                "argon2"
+                "dynlist"
+              ];
+            };
+          };
+
           "olcDatabase={1}mdb" = {
             attrs = {
-              objectClass = [ "olcDatabaseConfig" "olcMdbConfig" ];
+              objectClass = [
+                "olcDatabaseConfig"
+                "olcMdbConfig"
+              ];
 
               olcDatabase = "{1}mdb";
               olcDbDirectory = "/var/lib/openldap/data";
@@ -94,10 +108,20 @@ in
           
             children = {
               "olcOverlay={0}dynlist".attrs = {
-                objectClass = [ "olcDynamicList" "olcOverlayConfig" ];
+                objectClass = [
+                  "olcDynamicList"
+                  "olcOverlayConfig"
+                ];
                 olcOverlay = "{0}dynlist";
                 olcDlAttrSet = "groupOfURLs memberURL uniqueMember+memberOf@groupOfUniqueNames";
               };
+            };
+          };
+
+          "olcDatabase={-1}frontend" = {
+            attrs = {
+              objectClass = [ "olcDatabaseConfig" "olcFrontendConfig" ];
+              olcPasswordHash = "{ARGON2}";
             };
           };
         };

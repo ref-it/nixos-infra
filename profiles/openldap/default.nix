@@ -24,6 +24,7 @@ in
         ip6 saddr 2001:638:904:ffbe::191 tcp dport { 389, 636 } accept comment "web-2"
         ip6 saddr 2001:638:904:ffbe::192 tcp dport { 389, 636 } accept comment "web-2"
         ip6 saddr 2001:638:904:ffbe::193 tcp dport { 389, 636 } accept comment "web-2"
+        ip6 saddr 2001:638:904:ffbf::54 tcp dport { 389, 636 } accept comment "web-2-manage"
         ip6 saddr 2001:638:904:ffd0::13 tcp dport { 389, 636 } accept comment "majestix"
         ip6 saddr 2001:638:904:ffd0::15 tcp dport { 389, 636 } accept comment "miraculix"
       '';

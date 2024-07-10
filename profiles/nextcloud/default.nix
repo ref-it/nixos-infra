@@ -81,6 +81,8 @@ in
         maintenance_window_start = "2";
         trusted_proxies = cfg.trustedProxies;
         default_phone_region = "DE";
+        sharing.enable_share_accept = false;
+        sharing.force_share_accept = false;
       };
       config = {
         dbtype = "mysql";

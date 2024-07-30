@@ -165,6 +165,30 @@
           ];
           target = "finanzen.stura-ilmenau.de";
         }
+        {
+          sources = [
+            "helper.stura.tu-ilmenau.de"
+          ];
+          target = "helfer.stura-ilmenau.de";
+        }
+        {
+          sources = [
+            "protokoll.stura.tu-ilmenau.de"
+          ];
+          target = "protokoll.stura-ilmenau.de";
+        }
+        {
+          sources = [
+            "wahlen.stura.tu-ilmenau.de"
+          ];
+          target = "wahlen.stura-ilmenau.de";
+        }
+        {
+          sources = [
+            "wiki.stura.tu-ilmenau.de"
+          ];
+          target = "wiki.stura-ilmenau.de";
+        }
       ];
       streamProxy = [
         {

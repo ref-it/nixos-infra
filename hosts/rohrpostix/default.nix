@@ -167,6 +167,7 @@
         }
         {
           sources = [
+            "helfer.stura.tu-ilmenau.de"
             "helper.stura.tu-ilmenau.de"
           ];
           target = "helfer.stura-ilmenau.de";

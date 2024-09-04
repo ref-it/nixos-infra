@@ -71,6 +71,12 @@
       httpProxy = [
         {
           sources = [
+            "anmeldung.stura-ilmenau.de"
+          ];
+          target = "http://[2001:638:904:ffd0::25]";
+        }
+        {
+          sources = [
             "auth.stura-ilmenau.de"
           ];
           unrestrictedLocations = [ "/js" "/realms" "/resources" "/robots.txt" ];
@@ -88,9 +94,6 @@
             "helfer.stura-ilmenau.de"
             "helfer.erstiwoche.de"
             "helfer.fsr-ia.de"
-            "anmeldung.stura-ilmenau.de"
-            "anmeldung.erstiwoche.de"
-            "anmeldung.fsr-ia.de"
           ];
           target = "https://[2001:638:904:ffd0::d]";
           extraConfig = ''
@@ -136,12 +139,6 @@
             "projects.stura-ilmenau.de"
           ];
           target = "http://[2001:638:904:ffd0::14]";
-        }
-        {
-          sources = [
-            "new.stura-ilmenau.de"
-          ];
-          target = "http://[2001:638:904:ffd0::16]";
         }
       ];
       redirectPermanent = [

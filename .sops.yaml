@@ -1,6 +1,7 @@
 keys:
   - &admin_netali F72925946F580B058FB3F2719C55E636426B40A9
   - &admin_schlagma age1ncc0ukuqyeq8uzcvy2x0cymykrmnhzymgk22kvt7dvz99prjsysqjxgz9g
+  - &srv_grautvornix age144qxcuseq47mzvjrzl308ftf6qhwqkdenyflz0pz8a8x6ap8vq9qj82x28
   - &srv_gutemine age1jrdgsnxl0jqzdu7nk20ey97kehkcy57m6c7ww5au3nrw6vwyk9xq87jxgk
   - &srv_majestix age1es4y3s8sh0c67u3zsj72cvvfwcnx9ty7482w22dj8ajvngnatdtqx0gfdt
   - &srv_miraculix age1j78d0nj0jr7xk5mmgwcepjm7zrj0nun9t8meht3qrq5ywqqqudhs6syp5v
@@ -8,6 +9,13 @@ keys:
   - &srv_troubadix age1k0njnn7z8l3j600hhaux5fu0hy2gulp9kj4crauvsxzswt0pcddsu8pcl4
 
 creation_rules:
+  - path_regex: hosts/grautvornix/secrets.yaml$
+    key_groups:
+      - age:
+        - *srv_grautvornix
+        - *admin_schlagma
+        pgp:
+        - *admin_netali
   - path_regex: hosts/gutemine/secrets.yaml$
     key_groups:
       - age:

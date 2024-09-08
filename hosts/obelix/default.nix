@@ -42,6 +42,18 @@
             "10.170.20.1"
           ];
         };
+        "60-ens20" = {
+          name = "ens20";
+          networkConfig = {
+            IPv6AcceptRA = false;
+          };
+          address = [
+            "141.24.220.139/26"
+          ];
+          gateway = [
+            "141.24.220.190"
+          ];
+        };
       };
     };
 

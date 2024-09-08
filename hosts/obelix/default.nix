@@ -59,10 +59,19 @@
 
     sops.defaultSopsFile = ./secrets.yaml;
 
+    services.nginx = {
+      virtualHosts = {
+        "cloud.stura-ilmenau.de" = {
+          forceSSL = true;
+          enableACME = true;
+        };
+      };
+    };
+
     profiles.nextcloud = {
       enable = true;
       fqdn = "cloud.stura-ilmenau.de";
-      trustedProxies = [ "10.170.20.105" ];
+      trustedProxies = [];
     };
   };
 }

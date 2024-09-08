@@ -85,12 +85,6 @@
         }
         {
           sources = [
-            "cloud.stura-ilmenau.de"
-          ];
-          target = "http://10.170.20.103";
-        }
-        {
-          sources = [
             "helfer.stura-ilmenau.de"
             "helfer.erstiwoche.de"
             "helfer.fsr-ia.de"

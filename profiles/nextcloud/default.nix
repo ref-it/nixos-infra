@@ -73,6 +73,10 @@ in
       configureRedis = true;
       maxUploadSize = "2048M";
       phpOptions = {
+        "pm.max_children" = "224";
+        "pm.start_servers" = "56";
+        "pm.min_spare_servers" = "56";
+        "pm.max_spare_servers" = "168";
         "opcache.interned_strings_buffer" = "64";
         "opcache.memory_consumption" = "1024";
       };

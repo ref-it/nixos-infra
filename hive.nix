@@ -15,7 +15,7 @@ inputs:
   defaults = ./common;
 
   # Hosts (Server)
-  asterix = ./hosts/server/asterix;
+  # asterix = ./hosts/server/asterix;
   # automatix = ./hosts/server/automatix;
   # barometrix = ./hosts/server/barometrix;
   grautvornix = ./hosts/server/grautvornix;
@@ -27,8 +27,8 @@ inputs:
   troubadix = ./hosts/server/troubadix;
 
   # Hosts (Desktop)
-  luchs = ./hosts/desktop/luchs;
-  igel = ./hosts/desktop/igel;
+  # luchs = ./hosts/desktop/luchs;
+  # igel = ./hosts/desktop/igel;
 
 
   # bergmolch = ./hosts/raspi/bergmolch;

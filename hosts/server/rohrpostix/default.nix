@@ -154,19 +154,19 @@
           sources = [
             "fachschaftsrat-ei.de"
           ];
-          target = "fsr-ei.de"
+          target = "fsr-ei.de";
         }
         {
           sources = [
             "fachschaftsrat-mb.de"
           ];
-          target = "fsr-mb.de"
+          target = "fsr-mb.de";
         }
         {
           sources = [
             "fachschaftsrat-mn.de"
           ];
-          target = "fsr-mn.de"
+          target = "fsr-mn.de";
         }
         {
           sources = [

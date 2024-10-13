@@ -14,16 +14,22 @@ inputs:
 
   defaults = ./common;
 
-  # hosts
-  # automatix = ./hosts/automatix;
-  # barometrix = ./hosts/barometrix;
-  grautvornix = ./hosts/grautvornix;
-  gutemine = ./hosts/gutemine;
-  majestix = ./hosts/majestix;
-  miraculix = ./hosts/miraculix;
-  obelix = ./hosts/obelix;
-  rohrpostix = ./hosts/rohrpostix;
-  troubadix = ./hosts/troubadix;
+  # Hosts (Server)
+  asterix = ./hosts/server/asterix;
+  # automatix = ./hosts/server/automatix;
+  # barometrix = ./hosts/server/barometrix;
+  grautvornix = ./hosts/server/grautvornix;
+  gutemine = ./hosts/server/gutemine;
+  majestix = ./hosts/server/majestix;
+  miraculix = ./hosts/server/miraculix;
+  obelix = ./hosts/server/obelix;
+  rohrpostix = ./hosts/server/rohrpostix;
+  troubadix = ./hosts/server/troubadix;
 
-  # bergmolch = ./hosts/bergmolch;
+  # Hosts (Desktop)
+  luchs = ./hosts/desktop/luchs;
+  igel = ./hosts/desktop/igel;
+
+
+  # bergmolch = ./hosts/raspi/bergmolch;
 }

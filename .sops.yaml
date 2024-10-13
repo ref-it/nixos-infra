@@ -9,42 +9,42 @@ keys:
   - &srv_troubadix age1k0njnn7z8l3j600hhaux5fu0hy2gulp9kj4crauvsxzswt0pcddsu8pcl4
 
 creation_rules:
-  - path_regex: hosts/grautvornix/secrets.yaml$
+  - path_regex: hosts/server/grautvornix/secrets.yaml$
     key_groups:
       - age:
         - *srv_grautvornix
         - *admin_schlagma
         pgp:
         - *admin_netali
-  - path_regex: hosts/gutemine/secrets.yaml$
+  - path_regex: hosts/server/gutemine/secrets.yaml$
     key_groups:
       - age:
         - *srv_gutemine
         - *admin_schlagma
         pgp:
         - *admin_netali
-  - path_regex: hosts/majestix/secrets.yaml$
+  - path_regex: hosts/server/majestix/secrets.yaml$
     key_groups:
       - age:
         - *srv_majestix
         - *admin_schlagma
         pgp:
         - *admin_netali
-  - path_regex: hosts/miraculix/secrets.yaml$
+  - path_regex: hosts/server/miraculix/secrets.yaml$
     key_groups:
       - age:
         - *srv_miraculix
         - *admin_schlagma
         pgp:
         - *admin_netali
-  - path_regex: hosts/obelix/secrets.yaml$
+  - path_regex: hosts/server/obelix/secrets.yaml$
     key_groups:
       - age:
         - *srv_obelix
         - *admin_schlagma
         pgp:
         - *admin_netali
-  - path_regex: hosts/troubadix/secrets.yaml$
+  - path_regex: hosts/server/troubadix/secrets.yaml$
     key_groups:
       - age:
         - *srv_troubadix

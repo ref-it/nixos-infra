@@ -171,6 +171,21 @@
         }
         {
           sources = [
+            "stubra.de"
+            "studentenbeirat.de"
+          ];
+          target = "studierendenbeirat.de";
+        }
+        {
+          sources = [
+            "fh-ilmenau.de"
+            "th-ilmenau.de"
+            "studis-gegen-rechtsextremismus.de"
+          ];
+          target = "stura-ilmenau.de";
+        }
+        {
+          sources = [
             "wahlen.stura.tu-ilmenau.de"
           ];
           target = "wahlen.stura-ilmenau.de";

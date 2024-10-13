@@ -152,6 +152,30 @@
         }
         {
           sources = [
+            "fachschaftsrat-ei.de"
+          ];
+          target = "fsr-ei.de"
+        }
+        {
+          sources = [
+            "fachschaftsrat-mb.de"
+          ];
+          target = "fsr-mb.de"
+        }
+        {
+          sources = [
+            "fachschaftsrat-mn.de"
+          ];
+          target = "fsr-mn.de"
+        }
+        {
+          sources = [
+            "fachschaftsrat-wm.de"
+          ];
+          target = "fsr-wm.de";
+        }
+        {
+          sources = [
             "finanzen.stura.eu"
           ];
           target = "finanzen.stura-ilmenau.de";
@@ -178,14 +202,6 @@
         }
         {
           sources = [
-            "fh-ilmenau.de"
-            "th-ilmenau.de"
-            "studis-gegen-rechtsextremismus.de"
-          ];
-          target = "stura-ilmenau.de";
-        }
-        {
-          sources = [
             "wahlen.stura.tu-ilmenau.de"
           ];
           target = "wahlen.stura-ilmenau.de";
@@ -195,6 +211,14 @@
             "wiki.stura.tu-ilmenau.de"
           ];
           target = "wiki.stura-ilmenau.de";
+        }
+        {
+          sources = [
+            "fh-ilmenau.de"
+            "th-ilmenau.de"
+            "studis-gegen-rechtsextremismus.de"
+          ];
+          target = "stura-ilmenau.de";
         }
       ];
       streamProxy = [

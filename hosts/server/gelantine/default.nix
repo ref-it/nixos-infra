@@ -11,9 +11,9 @@
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
 
-    networking.hostName = "gutemine";
+    networking.hostName = "gelantine";
 
-    base.primaryIP = "2001:638:904:ffd0::24";
+    base.primaryIP = "2001:638:904:ffd0::1b";
 
     systemd.network = {
       enable = true;
@@ -24,7 +24,7 @@
             IPv6AcceptRA = false;
           };
           address = [
-            "2001:638:904:ffd0::24/64"
+            "2001:638:904:ffd0::1b/64"
           ];
           gateway = [
             "2001:638:904:ffd0::1"
@@ -33,11 +33,10 @@
       };
     };
 
-    sops.defaultSopsFile = ./secrets.yaml;
-
-    profiles.openldap = {
+    profiles.httpd-php = {
       enable = true;
-      fqdn = "ldap.stura-ilmenau.de";
+      fqdn = "lam.stura-ilmenau.de";
+      restricted = false;
     };
   };
 }

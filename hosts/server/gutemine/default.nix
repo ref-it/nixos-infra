@@ -43,7 +43,7 @@
     profiles.httpd-php = {
       enable = true;
       fqdn = "lam.stura-ilmenau.de";
-      restricted = true;
+      restricted = false;
     };
   };
 }

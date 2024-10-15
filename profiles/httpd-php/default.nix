@@ -28,7 +28,7 @@ in
     networking.firewall.allowedTCPPorts = if cfg.restricted then [] else [ 80 443 ];
     networking.firewall.extraInputRules = if cfg.restricted then ''
       ip6 saddr 2001:638:904::/48 tcp dport { 80, 443 } accept
-    '' else null;
+    '' else "";
 
     services.httpd = {
       enable = true;

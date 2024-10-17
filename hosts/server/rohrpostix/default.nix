@@ -73,7 +73,7 @@
           sources = [
             "anmeldung.stura-ilmenau.de"
           ];
-          target = "http://[2001:638:904:ffd0::25]";
+          target = "http://10.170.20.112";
         }
         {
           sources = [
@@ -89,7 +89,7 @@
             "helfer.erstiwoche.de"
             "helfer.fsr-ia.de"
           ];
-          target = "https://[2001:638:904:ffd0::d]";
+          target = "https://10.170.20.111";
           extraConfig = ''
             proxy_set_header X-Forwarded-For $remote_addr;
             proxy_set_header X-Forwarded-Proto $scheme;
@@ -126,13 +126,13 @@
           sources = [
             "onlyoffice.stura-ilmenau.de"
           ];
-          target = "http://[2001:638:904:ffd0::11]";
+          target = "http://10.170.20.109";
         }
         {
           sources = [
             "projects.stura-ilmenau.de"
           ];
-          target = "http://[2001:638:904:ffd0::14]";
+          target = "http://10.170.20.110";
         }
       ];
       redirectPermanent = [

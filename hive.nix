@@ -16,7 +16,7 @@ inputs:
 
   # Hosts (Server)
   # asterix = ./hosts/server/asterix;
-  # automatix = ./hosts/server/automatix;
+  automatix = ./hosts/server/automatix;
   barometrix = ./hosts/server/barometrix;
   gelantine = ./hosts/server/gelantine;
   grautvornix = ./hosts/server/grautvornix;

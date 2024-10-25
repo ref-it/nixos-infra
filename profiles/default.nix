@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./hedgedoc
     ./keycloak
     ./matrix
     ./nextcloud

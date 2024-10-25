@@ -113,7 +113,7 @@
           sources = [
             "infoscreen.stura-ilmenau.de"
           ];
-          target = "http://[2001:638:904:ffd0::20]";
+          target = "http://10.170.20.113";
         }
         {
           sources = [

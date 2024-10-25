@@ -31,6 +31,18 @@
               "2001:638:904:ffd0::1"
             ];
           };
+          "50-ens19" = {
+            name = "ens19";
+            networkConfig = {
+              IPv6AcceptRA = false;
+            };
+            address = [
+              "10.170.20.113/24"
+            ];
+            gateway = [
+              "10.170.20.1"
+            ];
+          };
         };
       };
       user.services.infoscreen = {

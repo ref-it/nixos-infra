@@ -60,10 +60,12 @@
 
     networking.firewall.allowedTCPPorts = [ 80 443 ];
 
-    services.nginx.virtualHosts."infoscreen.stura-ilmenau.de" = {
-      serverName = "infoscreen.stura-ilmenau.de";
-      locations."/" = {
-        proxyPass = "http://localhost:3000";
+    services.nginx = {
+      enable = true;
+      virtualHosts."infoscreen.stura-ilmenau.de" = {
+        locations."/" = {
+          proxyPass = "http://localhost:3000";
+        };
       };
     };
 

@@ -29,7 +29,7 @@ in
         virtualHosts = {
           "infoscreen.stura-ilmenau.de" = {
             locations."/" = {
-              proxyPass = "http://localhost:3333";
+              proxyPass = "http://localhost:3000";
               extraConfig = ''
                 proxy_set_header Host $host; 
                 proxy_set_header X-Real-IP $remote_addr; 

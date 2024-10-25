@@ -45,7 +45,7 @@
           };
         };
       };
-      user.services.infoscreen = {
+      services.infoscreen = {
         description = "StuRa-InfoScreen";
         serviceConfig = {
           Type = "simple";
@@ -63,7 +63,7 @@
     services.nginx.virtualHosts."infoscreen.stura-ilmenau.de" = {
       serverName = "infoscreen.stura-ilmenau.de";
       locations."/" = {
-        proxyPass = "http://localhost:3333";
+        proxyPass = "http://localhost:3000";
       };
     };
 

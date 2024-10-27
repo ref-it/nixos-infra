@@ -25,6 +25,7 @@ inputs:
   miraculix = ./hosts/server/miraculix;
   obelix = ./hosts/server/obelix;
   rohrpostix = ./hosts/server/rohrpostix;
+  sputnix = ./hosts/server/sputnix;
   troubadix = ./hosts/server/troubadix;
 
   # Hosts (Desktop)

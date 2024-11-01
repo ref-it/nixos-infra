@@ -6,6 +6,7 @@
     ./keycloak
     ./matrix
     ./nextcloud
+    ./hedgedoc
     ./httpd-php
     #./infoscreen-kiosk
     ./openldap

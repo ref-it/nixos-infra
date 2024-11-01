@@ -87,7 +87,7 @@
           sources = [
             "hedgedoc.stura-ilmenau.de"
           ];
-          target = "http://10.170.20.114";
+          target = "https://10.170.20.114";
         }
         {
           sources = [
@@ -133,6 +133,12 @@
             "onlyoffice.stura-ilmenau.de"
           ];
           target = "http://10.170.20.109";
+        }
+        {
+          sources = [
+            "paperless.stura-ilmenau.de"
+          ];
+          target = "https://10.170.20.116";
         }
         {
           sources = [

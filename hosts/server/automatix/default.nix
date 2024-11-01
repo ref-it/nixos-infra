@@ -44,6 +44,8 @@
         };
       };
     };
+    
+    sops.defaultSopsFile = ./secrets.yaml;
 
     profiles.hedgedoc = {
       enable = true;

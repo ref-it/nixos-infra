@@ -74,6 +74,10 @@ in
           sslCertificateKey = config.sops.secrets."tls-cert-key".path;
           locations."/" = {
             proxyPass = "http://127.0.0.1:28981";
+            extraConfig = ''
+              allow 10.170.20.105;
+              deny all;
+            '';
           };
         };
       };

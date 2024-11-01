@@ -87,7 +87,7 @@
           sources = [
             "hedgedoc.stura-ilmenau.de"
           ];
-          target = "http://10.170.20.114";
+          target = "https://10.170.20.114";
         }
         {
           sources = [

@@ -165,24 +165,28 @@
         {
           sources = [
             "fachschaftsrat-ei.de"
+            "www.fachschaftsrat-ei.de"
           ];
           target = "fsr-ei.de";
         }
         {
           sources = [
             "fachschaftsrat-mb.de"
+            "www.fachschaftsrat-mb.de"
           ];
           target = "fsr-mb.de";
         }
         {
           sources = [
             "fachschaftsrat-mn.de"
+            "www.fachschaftsrat-mn.de"
           ];
           target = "fsr-mn.de";
         }
         {
           sources = [
             "fachschaftsrat-wm.de"
+            "www.fachschaftsrat-wm.de"
           ];
           target = "fsr-wm.de";
         }
@@ -208,7 +212,9 @@
         {
           sources = [
             "stubra.de"
+            "www.stubra.de"
             "studentenbeirat.de"
+            "www.studentenbeirat.de"
           ];
           target = "studierendenbeirat.de";
         }
@@ -227,10 +233,13 @@
         {
           sources = [
             "fh-ilmenau.de"
+            "www.fh-ilmenau.de"
             "th-ilmenau.de"
+            "www.th-ilmenau.de"
             "studis-gegen-rechtsextremismus.de"
+            "www.studis-gegen-rechtsextremismus.de"
           ];
-          target = "stura-ilmenau.de";
+          target = "www.stura-ilmenau.de";
         }
       ];
       streamProxy = [

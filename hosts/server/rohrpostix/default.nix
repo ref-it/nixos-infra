@@ -245,6 +245,8 @@
           sources = [
             "markus-soeder-uni.de"
             "www.markus-soeder-uni.de"
+            "xn--markus-sder-uni-gtb.de"
+            "www.xn--markus-sder-uni-gtb.de"
           ];
           target = "medtech.fsi.fau.de";
         }

@@ -85,6 +85,13 @@
         }
         {
           sources = [
+            "ep.stura-ilmenau.de"
+            "ep.erstiwiki.de"
+          ];
+          target = "https://10.170.20.114";
+        }
+        {
+          sources = [
             "hedgedoc.stura-ilmenau.de"
           ];
           target = "https://10.170.20.114";

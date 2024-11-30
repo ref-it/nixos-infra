@@ -49,7 +49,7 @@ in
       sslCertificateKey = config.sops.secrets."tls-cert-key".path;
       settings = {
         hostname = cfg.fqdn;
-        proxy = "reencrypt";
+        reverse-proxy-headers = "xforwarded";
       };
     };
   };

@@ -4,10 +4,16 @@
   imports = [
     inputs.sops.nixosModules.sops
 
+    (inputs.nixpkgs-unstable + "/nixos/modules/services/development/zammad.nix")
+
     ./base-options.nix
     ./users.nix
 
     ../profiles
+  ];
+
+  disabledModules = [
+    "services/development/zammad.nix"
   ];
 
   config = {

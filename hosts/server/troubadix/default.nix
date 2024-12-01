@@ -13,7 +13,7 @@
 
     networking.hostName = "troubadix";
 
-    base.primaryIP = "2001:638:904:ffd0::25";
+    base.primaryIP = "2001:638:904:ffd0::22";
 
     systemd.network = {
       enable = true;
@@ -24,7 +24,7 @@
             IPv6AcceptRA = false;
           };
           address = [
-            "2001:638:904:ffd0::25/64"
+            "2001:638:904:ffd0::22/64"
           ];
           gateway = [
             "2001:638:904:ffd0::1"

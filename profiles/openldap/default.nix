@@ -19,7 +19,7 @@ in
 
   config = mkIf cfg.enable {
     networking.firewall = {
-      allowedTCPPorts = [ 80 ];
+      allowedTCPPorts = [ 80 443 ];
       extraInputRules = ''
         ip6 saddr 2001:638:904:ffbe::191 tcp dport { 389, 636 } accept comment "web-2"
         ip6 saddr 2001:638:904:ffbe::192 tcp dport { 389, 636 } accept comment "web-2"

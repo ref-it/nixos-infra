@@ -31,7 +31,6 @@ in
         ip6 saddr 2001:638:904:ffd0::13 tcp dport { 389, 636 } accept comment "majestix"
         ip6 saddr 2001:638:904:ffd0::14 tcp dport { 389, 636 } accept comment "hephaistos"
         ip6 saddr 2001:638:904:ffd0::15 tcp dport { 389, 636 } accept comment "miraculix"
-        ip6 saddr 2001:638:904:ffd0::1b tcp dport { 389, 636 } accept comment "gelantine"
       '';
     };
 

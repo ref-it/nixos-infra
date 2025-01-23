@@ -72,7 +72,7 @@
     environment.systemPackages = [
       pkgs.git
       pkgs.go
-      pkgs.nodejs_20
+      pkgs.nodejs_22
     ];
 
     /*profiles.infoscreen = {

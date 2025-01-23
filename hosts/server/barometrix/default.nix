@@ -49,8 +49,8 @@
         description = "StuRa-InfoScreen";
         serviceConfig = {
           Type = "simple";
-          WorkingDirectory = "/var/infoscreen/server/";
-          ExecStart = "/var/infoscreen/server/./server";
+          WorkingDirectory = "/var/lib/infoscreen/server/";
+          ExecStart = "/var/lib/infoscreen/server/./server";
           Restart = "always";
         };
         wantedBy = [ "default.target" ];

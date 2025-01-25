@@ -20,14 +20,6 @@ in
   config = mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = [ 80 443 ];
 
-    sops.secrets = {
-      "pretix-mail-pw" = {
-        owner = "pretix";
-        group = "pretix";
-        mode = "0400";
-      };
-    };
-
     services.pretix = {
       enable = true;
       gunicorn.extraArgs = [
@@ -46,9 +38,9 @@ in
           host = "imap.fem.tu-ilmenau.de";
           port = 587;
           user = "pretix@stura-ilmenau.de";
-          password = config.sops.secrets."pretix-mail-pw".path;
         };
       };
+      environmentFile = "/run/keys/pretix-secrets.env";
     };
 
     /*services.borgbackup.jobs.pretix = {

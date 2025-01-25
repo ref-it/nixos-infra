@@ -7,16 +7,16 @@
 
   boot.initrd.availableKernelModules = [ "ata_piix" "uhci_hcd" "virtio_pci" "virtio_scsi" "sd_mod" "sr_mod" ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/3df84e92-dd8f-4b37-8d73-06ee734ad80a";
+    { device = "/dev/disk/by-uuid/b731f0f7-3da9-4cea-a50e-0ea9d744e07d";
       fsType = "btrfs";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/560A-510D";
+    { device = "/dev/disk/by-uuid/CA52-0C81";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
@@ -29,6 +29,7 @@
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.ens18.useDHCP = lib.mkDefault true;
+  # networking.interfaces.ens19.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }

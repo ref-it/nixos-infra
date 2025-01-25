@@ -49,7 +49,7 @@
 
     profiles.pretix = {
       enable = true;
-      fqdn = "anmeldung.stura-ilmenau.de";
+      fqdn = "tickets.stura-ilmenau.de";
     };
   };
 }

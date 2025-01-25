@@ -71,12 +71,6 @@
       httpProxy = [
         {
           sources = [
-            "anmeldung.stura-ilmenau.de"
-          ];
-          target = "http://10.170.20.112";
-        }
-        {
-          sources = [
             "auth.stura-ilmenau.de"
           ];
           unrestrictedLocations = [ "/js" "/realms" "/resources" "/robots.txt" ];
@@ -152,6 +146,12 @@
             "projects.stura-ilmenau.de"
           ];
           target = "http://10.170.20.110";
+        }
+        {
+          sources = [
+            "tickets.stura-ilmenau.de"
+          ];
+          target = "http://10.170.20.112";
         }
       ];
       redirectPermanent = [

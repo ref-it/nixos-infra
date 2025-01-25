@@ -137,12 +137,6 @@
         }
         {
           sources = [
-            "paperless.stura-ilmenau.de"
-          ];
-          target = "https://10.170.20.116";
-        }
-        {
-          sources = [
             "projects.stura-ilmenau.de"
           ];
           target = "http://10.170.20.110";

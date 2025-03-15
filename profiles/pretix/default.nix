@@ -41,6 +41,9 @@ in
         };
       };
       environmentFile = "/run/keys/pretix-secrets.env";
+      plugins = with config.services.pretix.package.plugins; [
+        pages
+      ];
     };
 
     /*services.borgbackup.jobs.pretix = {

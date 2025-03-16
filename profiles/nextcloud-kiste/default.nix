@@ -101,5 +101,9 @@ in
       };
       groups.${cfg.name} = {};
     };
+
+    environment.systemPackages = [
+      pkgs.unzip
+    ];
   };
 }

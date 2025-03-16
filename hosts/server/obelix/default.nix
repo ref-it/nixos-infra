@@ -75,5 +75,12 @@
       fqdn = "cloud.stura-ilmenau.de";
       trustedProxies = [];
     };
+
+    profiles.nextcloud-kiste = {
+      enable = true;
+      name = "nextcloud-kiste";
+      fqdn = "kiste.stura-ilmenau.de";
+      dir = "/var/lib/nextcloud-kiste";
+    };
   };
 }

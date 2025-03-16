@@ -72,7 +72,7 @@ in
             forceSSL = true;
             enableACME = true;
             locations."/" = {
-              root = cfg.dir;
+              root = "${cfg.dir}/nextcloud";
               extraConfig = ''
                 fastcgi_split_path_info ^(.+\.php)(/.+)$;
                 fastcgi_pass unix:${config.services.phpfpm.pools.${cfg.name}.socket};

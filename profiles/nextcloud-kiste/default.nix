@@ -67,21 +67,21 @@ in
 
       nginx = {
         enable = true;
+        recommendedGzipSettings = true;
         virtualHosts = {
           ${cfg.fqdn} = {
             root = "${cfg.dir}/nextcloud";
             forceSSL = true;
             enableACME = true;
-            locations = {
-              "= /" = {
-                priority = 50;
-                extraConfig = ''
-                  if ( $http_user_agent ~ ^DavClnt ) {
-                    return 302 /remote.php/webdav/$is_args$args;
-                  }
-                '';
-              };
+            extraConfig = ''
+              index index.php index.html /index.php$request_uri;
 
+              # set max upload size and increase upload timeout:
+              client_max_body_size 512M;
+              client_body_timeout 300s;
+              fastcgi_buffers 64 4K;
+            '';
+            locations = {
               "^~ /.well-known" = {
                 priority = 100;
                 extraConfig = ''
@@ -117,14 +117,14 @@ in
 
                   try_files $fastcgi_script_name =404;
 
-                  include fastcgi_params;
+                  include ${pkgs.nginx}/conf/fastcgi.conf;
                   fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
                   fastcgi_param PATH_INFO $path_info;
                   fastcgi_param HTTPS on;
 
                   fastcgi_param modHeadersAvailable true;         # Avoid sending the security headers twice
                   fastcgi_param front_controller_active true;     # Enable pretty urls
-                  fastcgi_pass php-handler;
+                  fastcgi_pass unix:${config.services.phpfpm.pools.${cfg.name}.socket};
 
                   fastcgi_intercept_errors on;
                   fastcgi_request_buffering off;
@@ -138,7 +138,7 @@ in
                 extraConfig = ''
                   try_files $uri /index.php$request_uri;
                   # HTTP response headers borrowed from Nextcloud `.htaccess`
-                  add_header Cache-Control                     "public, max-age=15778463$asset_immutable";
+                  add_header Cache-Control                     "public, max-age=15778463";
                   add_header Referrer-Policy                   "no-referrer"       always;
                   add_header X-Content-Type-Options            "nosniff"           always;
                   add_header X-Frame-Options                   "SAMEORIGIN"        always;

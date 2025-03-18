@@ -74,6 +74,7 @@ in
             enableACME = true;
             locations = {
               "= /" = {
+                priority = 50;
                 extraConfig = ''
                   if ( $http_user_agent ~ ^DavClnt ) {
                     return 302 /remote.php/webdav/$is_args$args;
@@ -82,6 +83,7 @@ in
               };
 
               "^~ /.well-known" = {
+                priority = 100;
                 extraConfig = ''
                   location = /.well-known/carddav { return 301 /remote.php/dav/; }
                   location = /.well-known/caldav  { return 301 /remote.php/dav/; }
@@ -96,14 +98,17 @@ in
               };
 
               "~ ^/(?:build|tests|config|lib|3rdparty|templates|data)(?:$|/)" = {
+                priority = 150;
                 return = "404";
               };
 
               "~ ^/(?:\.|autotest|occ|issue|indie|db_|console)" = {
+                priority = 200;
                 return = "404";
               };
 
               "~ \.php(?:$|/)" = {
+                priority = 250;
                 extraConfig = ''
                   rewrite ^/(?!index|remote|public|cron|core\/ajax\/update|status|ocs\/v[12]|updater\/.+|ocs-provider\/.+|.+\/richdocumentscode(_arm64)?\/proxy) /index.php$request_uri;
 
@@ -129,6 +134,7 @@ in
               };
 
               "~ \.(?:css|js|mjs|svg|gif|ico|jpg|png|webp|wasm|tflite|map|ogg|flac)$" = {
+                priority = 300;
                 extraConfig = ''
                   try_files $uri /index.php$request_uri;
                   # HTTP response headers borrowed from Nextcloud `.htaccess`
@@ -144,6 +150,7 @@ in
               };
 
               "~ \.(otf|woff2?)$" = {
+                priority = 350;
                 tryFiles = "$uri /index.php$request_uri";
                 extraConfig = ''
                   expires 7d;         # Cache-Control policy borrowed from `.htaccess`
@@ -152,10 +159,12 @@ in
               };
 
               "/remote" = {
+                priority = 400;
                 return = "301 /remote.php$request_uri";
               };
 
               "/" = {
+                priority = 450;
                 tryFiles = "$uri $uri/ /index.php$request_uri";
               };
             };

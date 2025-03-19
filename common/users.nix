@@ -2,6 +2,12 @@
 
 {
   users.users = {
+    karim = {
+      isNormalUser = true;
+      extraGroups = [ "wheel" ];
+      openssh.authorizedKeys.keys = [ "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDIIW5JAOReayvcN9YIxIrq+8qB2zJz6QGsClnulxjkNMs6vugDOlkucEcAhxcfCyn8G4D76oaR41acTApe+UNVrzQ2Spb/Ph0rqgc5Sfbnhf2u1DIcHSK8P1wWLdZfPavxcmdnW4NO5k2x77lLPxWX/oLmAy4o33bjVvTA5NQeRs1qXteTSMA0Oj+2YmECPygcZvZlrnjeDkFDiQpB5PS6BY8Xs9vPRtDzdzI8wweIxBTmbjiPhKDPXJG15oYJDeqKQ7+0vZtkycUqehP1Uyz1gjAf5MdZDUCCNKZHS3GRA7iZAIvaLaUQM+1ma2fD3QGSkUH6a775ifeqaqCLJW1794sIDBoAO9NXkmy2cJ9DJAD3VJ+37LjSlukF8U2NxuEwMIJacirXvUbQxfec1ljcFalzSzAdEIjO1ro6Ocm3cuJF3TniHR47fH4AVSJ0rsXPgI5Nqq4qOUjkVp0mA8C1tsiaYO1GVNEmgNPvXOOdmwbIOg1Bf7p7lSo+zxh/XD5T82EvceSjF4pyrWCdX7BdbXikGlk2t/HF4U8q60eNf+svqoPAGUhXDBeKKXjycsHk5OJsbSeiAaws6z9rysMLgdccrKCAaaEyC2xFXaVfsNWxvl+K1qhCEy8I1a3u7JvPM4D7BcQmFoVIv1Dg2rxGvdqmEex1YvlZDj0Pn4YzEQ== karim.wagner@tu-ilmenau.de" ];
+    };
+
     lukas = {
       isNormalUser = true;
       extraGroups = [ "wheel" ];

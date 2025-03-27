@@ -66,7 +66,7 @@ in
 
     services.nextcloud = {
       enable = true;
-      package = pkgs.nextcloud30;
+      package = pkgs.nextcloud31;
       https = true;
       hostName = cfg.fqdn;
       autoUpdateApps.enable = true;

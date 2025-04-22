@@ -7,6 +7,8 @@
     flake-utils.url = "github:numtide/flake-utils";
     colmena.url = "github:zhaofengli/colmena/stable";
     colmena.inputs.nixpkgs.follows = "nixpkgs";
+
+    linkwarden.url = "https://github.com/jvanbruegge/nixpkgs/tree/linkwarden";
   };
 
   outputs = { self, nixpkgs, colmena, sops, flake-utils, ... }@inputs: {

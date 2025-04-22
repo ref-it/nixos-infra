@@ -8,6 +8,7 @@ inputs:
       system = "x86_64-linux";
       overlays = [
         (final: prev: { inherit (import inputs.nixpkgs-unstable { system = prev.system; }) zammad; })
+        (final: prev: { inherit (import inputs.linkwarden { system = prev.system; }) linkwarden; })
       ];
     };
 

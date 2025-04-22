@@ -2,13 +2,15 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-linkwarden.url = "github:jvanbruegge/nixpkgs/linkwarden";
+
+
     sops.url = "github:Mic92/sops-nix";
     sops.inputs.nixpkgs.follows = "nixpkgs";
     flake-utils.url = "github:numtide/flake-utils";
     colmena.url = "github:zhaofengli/colmena/stable";
     colmena.inputs.nixpkgs.follows = "nixpkgs";
 
-    linkwarden.url = "https://github.com/jvanbruegge/nixpkgs/tree/linkwarden";
   };
 
   outputs = { self, nixpkgs, colmena, sops, flake-utils, ... }@inputs: {

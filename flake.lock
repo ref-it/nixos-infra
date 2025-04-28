@@ -158,7 +158,6 @@
     "root": {
       "inputs": {
         "colmena": "colmena",
-        "flake-keycloak-theme-stura": "flake-keycloak-theme-stura",
         "flake-utils": "flake-utils_3",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-linkwarden": "nixpkgs-linkwarden",

@@ -40,25 +40,6 @@
         "type": "github"
       }
     },
-    "flake-keycloak-theme-stura": {
-      "inputs": {
-        "flake-utils": "flake-utils_2",
-        "nixpkgs": "nixpkgs"
-      },
-      "locked": {
-        "lastModified": 1745360798,
-        "narHash": "sha256-rShAYE2FAuMk6H9Zcw7H11morLzUgV03cNoxFchoKQQ=",
-        "owner": "ref-it",
-        "repo": "keycloak-theme-stura",
-        "rev": "e720fb737d0ca288b09d3a4667ffcb5cbc48b3c0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "ref-it",
-        "repo": "keycloak-theme-stura",
-        "type": "github"
-      }
-    },
     "flake-utils": {
       "locked": {
         "lastModified": 1659877975,

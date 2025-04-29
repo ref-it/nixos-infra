@@ -143,6 +143,12 @@
         }
         {
           sources = [
+            "talks.stura-ilmenau.de"
+          ];
+          target = "http://10.170.20.119";
+        }
+        {
+          sources = [
             "tickets.stura-ilmenau.de"
           ];
           target = "http://10.170.20.112";

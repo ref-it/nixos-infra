@@ -50,6 +50,7 @@ in
       settings = {
         hostname = cfg.fqdn;
         reverse-proxy-headers = "xforwarded";
+        log-syslog-level = "debug";
       };
     };
   };

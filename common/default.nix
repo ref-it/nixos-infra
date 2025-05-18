@@ -5,7 +5,6 @@
     inputs.sops.nixosModules.sops
 
     (inputs.nixpkgs-unstable + "/nixos/modules/services/development/zammad.nix")
-    (inputs.nixpkgs-linkwarden + "/nixos/modules/services/web-apps/linkwarden.nix")
 
     ./base-options.nix
     ./users.nix

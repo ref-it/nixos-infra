@@ -73,7 +73,9 @@
     profiles.nextcloud = {
       enable = true;
       fqdn = "cloud.stura-ilmenau.de";
-      trustedProxies = [];
+      trustedProxies = [
+        "2001:638:904:ffd0::12"
+      ];
     };
 
     profiles.nextcloud-kiste = {

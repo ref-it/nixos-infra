@@ -71,21 +71,6 @@
       httpProxy = [
         {
           sources = [
-            "ak.stura-ilmenau.de"
-            "ak.fsr-ia.de"
-          ];
-          target = "https://10.170.20.120";
-        }
-        {
-          sources = [
-            "auth.stura-ilmenau.de"
-          ];
-          unrestrictedLocations = [ "/js" "/realms" "/resources" "/robots.txt" ];
-          restrictedLocations = [ "/admin" ];
-          target = "https://10.170.20.106";
-        }
-        {
-          sources = [
             "ep.stura-ilmenau.de"
             "ep.erstiwiki.de"
           ];

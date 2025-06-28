@@ -67,6 +67,37 @@
           forceSSL = true;
           enableACME = true;
         };
+
+        "auth.stura-ilmenau.de" = {
+          forceSSL = true;
+          enableACME = true;
+          extraConfig = ''
+            set_real_ip_from 0.0.0.0/0;
+            real_ip_header X-Real-IP;
+            real_ip_recursive on;
+          '';
+          locations = {
+            "/" = {
+              proxyPass = "https://10.170.20.106";
+              extraConfig = ''
+                proxy_redirect off;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $remote_addr;
+                proxy_set_header X-Forwarded-Proto $scheme;
+                proxy_set_header X-Forwarded-Port 443;
+              '';
+            };
+            "/admin" = {
+              proxyPass = "https://10.170.20.106";
+              extraConfig = ''
+                allow 141.24.44.128/25;
+                allow 2001:638:904:ffd0::/64;
+                deny all;
+              '';
+            };
+          };
+        };
       };
     };
 

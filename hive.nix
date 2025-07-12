@@ -23,7 +23,6 @@ inputs:
   gelantine = ./hosts/server/gelantine;
   grautvornix = ./hosts/server/grautvornix;
   gutemine = ./hosts/server/gutemine;
-  idefix = ./hosts/server/idefix;
   majestix = ./hosts/server/majestix;
   miraculix = ./hosts/server/miraculix;
   obelix = ./hosts/server/obelix;

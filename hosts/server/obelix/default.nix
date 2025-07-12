@@ -115,5 +115,14 @@
       fqdn = "kiste.stura-ilmenau.de";
       dir = "/var/lib/nextcloud-kiste";
     };
+
+    profiles.collabora = {
+      enable = true;
+      fqdn = "office.stura-ilmenau.de";
+      trustedHosts = [
+        "cloud.stura-ilmenau.de"
+        "2001:638:904:ffd0::12"
+      ];
+    };
   };
 }

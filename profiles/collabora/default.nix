@@ -28,6 +28,19 @@ in
   config = mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = [ 80 443 ];
 
+    sops.secrets = {
+      "tls-cert" = {
+        owner = "nginx";
+        group = "nginx";
+        mode = "0400";
+      };
+      "tls-cert-key" = {
+        owner = "nginx";
+        group = "nginx";
+        mode = "0400";
+      };
+    };
+
     services.collabora-online = {
       enable = true;
       port = 9980;

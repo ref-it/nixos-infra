@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./collabora
     ./hedgedoc
     ./keycloak
     ./matrix

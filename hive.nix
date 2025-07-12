@@ -23,6 +23,7 @@ inputs:
   gelantine = ./hosts/server/gelantine;
   grautvornix = ./hosts/server/grautvornix;
   gutemine = ./hosts/server/gutemine;
+  idefix = ./hosts/server/idefix;
   majestix = ./hosts/server/majestix;
   miraculix = ./hosts/server/miraculix;
   obelix = ./hosts/server/obelix;
@@ -33,7 +34,4 @@ inputs:
   # Hosts (Desktop)
   # luchs = ./hosts/desktop/luchs;
   # igel = ./hosts/desktop/igel;
-
-
-  # bergmolch = ./hosts/raspi/bergmolch;
 }

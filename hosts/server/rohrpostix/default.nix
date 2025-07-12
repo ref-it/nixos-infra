@@ -71,6 +71,12 @@
       httpProxy = [
         {
           sources = [
+            "collabora.stura-ilmenau.de"
+          ];
+          target = "https://10.170.20.120";
+        }
+        {
+          sources = [
             "ep.stura-ilmenau.de"
             "ep.erstiwiki.de"
           ];

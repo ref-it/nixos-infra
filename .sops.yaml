@@ -4,6 +4,7 @@ keys:
   - &srv_automatix age1ss4mpym5gkgzqmjht0unpggjxz4w392n94afx4zglw27yj8ny9nq9rxx88
   - &srv_grautvornix age144qxcuseq47mzvjrzl308ftf6qhwqkdenyflz0pz8a8x6ap8vq9qj82x28
   - &srv_gutemine age1jrdgsnxl0jqzdu7nk20ey97kehkcy57m6c7ww5au3nrw6vwyk9xq87jxgk
+  - &srv_idefix age1xs0s8e6r0e56cmu4z0uzkseupy3xdy7jft2qq3vw8aeaxal8f9psds3827
   - &srv_majestix age1es4y3s8sh0c67u3zsj72cvvfwcnx9ty7482w22dj8ajvngnatdtqx0gfdt
   - &srv_miraculix age1j78d0nj0jr7xk5mmgwcepjm7zrj0nun9t8meht3qrq5ywqqqudhs6syp5v
   - &srv_obelix age1hcnc4xp69rwh8dhcvgdrykd45pm9qy6u7cvmda2nrkp934z38gashg8vr8
@@ -29,6 +30,13 @@ creation_rules:
     key_groups:
       - age:
         - *srv_gutemine
+        - *admin_schlagma
+        pgp:
+        - *admin_netali
+  - path_regex: hosts/server/idefix/secrets.yaml$
+    key_groups:
+      - age:
+        - *srv_idefix
         - *admin_schlagma
         pgp:
         - *admin_netali

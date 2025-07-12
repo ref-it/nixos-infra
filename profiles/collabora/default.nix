@@ -54,11 +54,13 @@ in
       enable = true;
       recommendedProxySettings = true;
       recommendedTlsSettings = true;
-      virtualHosts."{$cfg.fqdn} =  {
+      virtualHosts."{$cfg.fqdn}" = {
         forceSSL = true;
+        sslCertificate = config.sops.secrets."tls-cert".path;
+        sslCertificateKey = config.sops.secrets."tls-cert-key".path;
         locations."/" = {
           proxyPass = "http://[::1]:${toString config.services.collabora-online.port}";
-          proxyWebsockets = true; # collabora uses websockets
+          proxyWebsockets = true;
         };
       };
     };

@@ -67,7 +67,7 @@ in
       enable = true;
       recommendedProxySettings = true;
       recommendedTlsSettings = true;
-      virtualHosts."{$cfg.fqdn}" = {
+      virtualHosts."${cfg.fqdn}" = {
         forceSSL = true;
         sslCertificate = config.sops.secrets."tls-cert".path;
         sslCertificateKey = config.sops.secrets."tls-cert-key".path;

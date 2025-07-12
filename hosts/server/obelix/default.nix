@@ -91,8 +91,8 @@
             "/admin" = {
               proxyPass = "https://10.170.20.106";
               extraConfig = ''
-                allow 141.24.44.128/25;
-                allow 2001:638:904:ffd0::/64;
+                allow 141.24.0.0/16;
+                allow 2001:638:904::/48;
                 deny all;
               '';
             };

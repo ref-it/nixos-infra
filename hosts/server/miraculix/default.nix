@@ -45,6 +45,10 @@
       };
     };
 
+    networking.extraHosts = ''
+      2001:638:904:ffd0::24 ldap.stura-ilmenau.de
+    '';
+
     sops.defaultSopsFile = ./secrets.yaml;
 
     profiles.zammad = {

@@ -21,6 +21,8 @@ in
     networking.firewall = {
       allowedTCPPorts = [ 80 443 ];
       extraInputRules = ''
+        ip saddr 10.170.20.104 tcp dport { 389, 636 } accept comment "miraculix"
+        ip saddr 10.170.20.106 tcp dport { 389, 636 } accept comment "majestix"
         ip saddr 10.170.20.117 tcp dport { 389, 636 } accept comment "gelantine"
         ip6 saddr 2001:638:904:ffbe::190 tcp dport { 389, 636 } accept comment "web-2"
         ip6 saddr 2001:638:904:ffbe::191 tcp dport { 389, 636 } accept comment "web-2"

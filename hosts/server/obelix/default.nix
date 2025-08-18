@@ -124,5 +124,39 @@
         "2001:638:904:ffd0::12"
       ];
     };
+
+    fonts.packages = with pkgs; [
+      adwaita-fonts
+      alegreya-sans
+      aleo-fonts
+      atkinson-hyperlegible
+      atkinson-hyperlegible-mono
+      atkinson-hyperlegible-next
+      barlow
+      cabin
+      cantarell-fonts
+      crimson
+      eb-garamond
+      gelasio
+      paratype-pt-mono
+      paratype-pt-sans
+      paratype-pt-serif
+      fira
+      ibm-plex
+      inter
+      jost
+      merriweather
+      merriweather-sans
+      oxygenfonts
+      redhat-official-fonts
+      roboto
+      roboto-mono
+      roboto-serif
+      roboto-slab
+      ubuntu-sans
+      ubuntu-sans-mono
+      work-sans
+      zilla-slab
+    ];
   };
 }

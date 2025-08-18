@@ -47,6 +47,7 @@ in
           host = cfg.trustedHosts;
         };
         server_name = cfg.fqdn;
+        remote_font_config.url = "https://cloud.stura-ilmenau.de/apps/richdocuments/settings/fonts.json";
       };
     };
 

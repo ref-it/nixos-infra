@@ -51,5 +51,10 @@
       enable = true;
       fqdn = "hedgedoc.stura-ilmenau.de";
     };
+
+    profiles.etherpad = {
+      enable = true;
+      fqdn = "ep.stura-ilmenau.de";
+    };
   };
 }

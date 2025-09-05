@@ -3,13 +3,13 @@
 {
   imports = [
     ./collabora
+    ./etherpad
     ./hedgedoc
+    ./httpd-php
     ./keycloak
     ./matrix
     ./nextcloud
     ./nextcloud-kiste
-    ./hedgedoc
-    ./httpd-php
     ./openldap
     ./pretix
     ./reverse-proxy

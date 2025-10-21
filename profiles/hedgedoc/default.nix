@@ -61,6 +61,7 @@ in
             "${cfg.fqdn}"
           ];
         };
+        environmentFile = "/var/lib/hedgedoc/hedgedoc.env";
       };
 
       nginx = {

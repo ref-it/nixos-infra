@@ -123,12 +123,6 @@
         }
         {
           sources = [
-            "onlyoffice.stura-ilmenau.de"
-          ];
-          target = "http://10.170.20.109";
-        }
-        {
-          sources = [
             "projects.stura-ilmenau.de"
           ];
           target = "http://10.170.20.110";
@@ -138,6 +132,12 @@
             "tickets.stura-ilmenau.de"
           ];
           target = "http://10.170.20.112";
+        }
+        {
+          sources = [
+            "vault.stura-ilmenau.de"
+          ];
+          target = "https://10.170.20.120";
         }
       ];
       redirectPermanent = [

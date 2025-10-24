@@ -138,6 +138,11 @@
             "vault.stura-ilmenau.de"
           ];
           target = "https://10.170.20.120";
+          websocket = {
+            enable = true;
+            target = "https://10.170.20.120";
+            locations = [ "/" ];
+          };
         }
       ];
       redirectPermanent = [

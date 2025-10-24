@@ -62,6 +62,8 @@ in
         DATABASE_URL = "postgresql:///vaultwarden?host=/run/postgresql";
         ROCKET_ADDRESS = "::1";
         ROCKET_PORT = 8222;
+        SSO_ENABLED = true;
+        SSO_AUTHORITY = "https://auth.stura-ilmenau.de/realms/stura";
       };
       environmentFile = "/var/lib/vaultwarden.env";
     };

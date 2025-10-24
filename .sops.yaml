@@ -7,8 +7,8 @@ keys:
   - &srv_majestix age1es4y3s8sh0c67u3zsj72cvvfwcnx9ty7482w22dj8ajvngnatdtqx0gfdt
   - &srv_miraculix age1j78d0nj0jr7xk5mmgwcepjm7zrj0nun9t8meht3qrq5ywqqqudhs6syp5v
   - &srv_obelix age1hcnc4xp69rwh8dhcvgdrykd45pm9qy6u7cvmda2nrkp934z38gashg8vr8
-  - &srv_sputnix age1d4cx7g3njnjtqtmkyl3sty2esre88jjypskah9csdmykcdru99xqfjg2k5
   - &srv_troubadix age1k0njnn7z8l3j600hhaux5fu0hy2gulp9kj4crauvsxzswt0pcddsu8pcl4
+  - &srv_verliernix age1z0uzlmz2gpcqaw42jmr3xremvdpgasz4mwy273pwv77hrfxzr36s8cp2fq
 
 creation_rules:
   - path_regex: hosts/server/automatix/secrets.yaml$
@@ -53,17 +53,17 @@ creation_rules:
         - *admin_schlagma
         pgp:
         - *admin_netali
-  - path_regex: hosts/server/sputnix/secrets.yaml$
-    key_groups:
-      - age:
-        - *srv_sputnix
-        - *admin_schlagma
-        pgp:
-        - *admin_netali
   - path_regex: hosts/server/troubadix/secrets.yaml$
     key_groups:
       - age:
         - *srv_troubadix
+        - *admin_schlagma
+        pgp:
+        - *admin_netali
+  - path_regex: hosts/server/verliernix/secrets.yaml$
+    key_groups:
+      - age:
+        - *srv_verliernix
         - *admin_schlagma
         pgp:
         - *admin_netali

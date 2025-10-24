@@ -13,6 +13,7 @@
     ./openldap
     ./pretix
     ./reverse-proxy
+    ./vaultwarden
     ./zammad
   ];
 }

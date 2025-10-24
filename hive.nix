@@ -8,6 +8,7 @@ inputs:
       system = "x86_64-linux";
       overlays = [
         (final: prev: { inherit (import inputs.nixpkgs-unstable { system = prev.system; }) keycloak; })
+        (final: prev: { inherit (import inputs.nixpkgs-unstable { system = prev.system; }) vaultwarden; })
       ];
     };
 
@@ -27,8 +28,8 @@ inputs:
   miraculix = ./hosts/server/miraculix;
   obelix = ./hosts/server/obelix;
   rohrpostix = ./hosts/server/rohrpostix;
-  #sputnix = ./hosts/server/sputnix;
   troubadix = ./hosts/server/troubadix;
+  verliernix = ./hosts/server/verliernix;
 
   # Hosts (Desktop)
   # luchs = ./hosts/desktop/luchs;

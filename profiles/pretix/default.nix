@@ -37,6 +37,10 @@ in
         languages = {
           enabled = "de,en";
         };
+        locale = {
+          default = "de";
+          timezone = "Europe/Berlin";
+        };
         mail = {
           from = "pretix@stura-ilmenau.de";
           host = "imap.fem.tu-ilmenau.de";

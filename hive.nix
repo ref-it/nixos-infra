@@ -8,6 +8,7 @@ inputs:
       system = "x86_64-linux";
       overlays = [
         (final: prev: { inherit (import inputs.nixpkgs-unstable { system = prev.system; }) keycloak; })
+        (final: prev: { inherit (import inputs.nixpkgs-unstable { system = prev.system; }) pretix; })
         (final: prev: { inherit (import inputs.nixpkgs-unstable { system = prev.system; }) vaultwarden; })
       ];
     };

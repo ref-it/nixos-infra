@@ -32,18 +32,16 @@ in
           instance_name = cfg.fqdn;
           registration = false;
           url = "https://${cfg.fqdn}";
+          currency = "EUR";
         };
         mail = {
           from = "pretix@stura-ilmenau.de";
           host = "imap.fem.tu-ilmenau.de";
           port = 587;
-          user = "pretix@stura-ilmenau.de";
+          tls = "on";
         };
       };
-      environmentFile = "/run/keys/pretix-secrets.env";
-      plugins = with config.services.pretix.package.plugins; [
-        pages
-      ];
+      environmentFile = "/var/lib/pretix.env";
     };
 
     /*services.borgbackup.jobs.pretix = {

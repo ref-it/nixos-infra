@@ -34,6 +34,9 @@ in
           url = "https://${cfg.fqdn}";
           currency = "EUR";
         };
+        languages = {
+          enabled = "de,en";
+        };
         mail = {
           from = "pretix@stura-ilmenau.de";
           host = "imap.fem.tu-ilmenau.de";

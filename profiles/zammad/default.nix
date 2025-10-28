@@ -31,12 +31,38 @@ in
         group = "zammad";
         mode = "0400";
       };
+      "borg-passphrase" = {
+        owner = "root";
+        group = "root";
+        mode = "0400";
+      };
     };
 
     services.zammad = {
       enable = true;
       host = cfg.bindHost;
       secretKeyBaseFile = config.sops.secrets."zammad-secret-key".path;
+    };
+
+    services.borgbackup.jobs.zammad = {
+      user = "root";
+      group = "root";
+      repo = "ssh://backup:23/./zammad";
+      readWritePaths = [ "/var/lib/zammad/db-backup" ];
+      preHook = ''
+        cd /var/lib/zammad
+        rm -f db-backup/*
+        ${pkgs.postgresql}/bin/pg_dump zammad > db-backup/zammad.sql
+      '';
+      paths = [ "config" "db-backup" ];
+      doInit = false;
+      startAt = [ "*-*-* 03:40:00" ];
+      encryption.mode = "repokey";
+      encryption.passCommand = "cat ${config.sops.secrets."borg-passphrase".path}";
+      prune.keep.within = "1y";
+      compression = "auto,zstd";
+      dateFormat = "+%Y-%m-%d";
+      archiveBaseName = "backup";
     };
   };
 }

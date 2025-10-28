@@ -21,6 +21,11 @@ in
     networking.firewall.allowedTCPPorts = [ 80 443 ];
 
     sops.secrets = {
+      "borg-passphrase" = {
+        owner = "root";
+        group = "root";
+        mode = "0400";
+      };
       "tls-cert" = {
         owner = "nginx";
         group = "nginx";
@@ -99,6 +104,27 @@ in
             '';
           };
         };
+      };
+      
+      borgbackup.jobs.hedgedoc = {
+        user = "root";
+        group = "root";
+        repo = "ssh://backup:23/./hedgedoc";
+        readWritePaths = [ "/var/lib/hedgedoc/db-backup" ];
+        preHook = ''
+          cd /var/lib/hedgedoc
+          rm -f db-backup/*
+          ${pkgs.postgresql}/bin/pg_dump hedgedoc > db-backup/hedgedoc.sql
+        '';
+        paths = [ "uploads" "db-backup" ];
+        doInit = false;
+        startAt = [ "*-*-* 03:30:00" ];
+        encryption.mode = "repokey";
+        encryption.passCommand = "cat ${config.sops.secrets."borg-passphrase".path}";
+        prune.keep.within = "1y";
+        compression = "auto,zstd";
+        dateFormat = "+%Y-%m-%d";
+        archiveBaseName = "backup";
       };
     };
   };

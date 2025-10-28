@@ -44,6 +44,11 @@ in
         group = "openldap";
         mode = "0400";
       };
+      "borg-passphrase" = {
+        owner = "root";
+        group = "root";
+        mode = "0400";
+      };
     };
 
     services.openldap = {
@@ -151,6 +156,24 @@ in
     security.acme.certs."${cfg.fqdn}" = {
       extraDomainNames = [];
       listenHTTP = ":80";
+    };
+
+    services.borgbackup.jobs.openldap = {
+      user = "root";
+      group = "root";
+      repo = "ssh://backup:23/./openldap";
+      preHook = ''
+        cd /var/lib/openldap
+      '';
+      paths = [ "data" ];
+      doInit = false;
+      startAt = [ "*-*-* 05:00:00" ];
+      encryption.mode = "repokey";
+      encryption.passCommand = "cat ${config.sops.secrets."borg-passphrase".path}";
+      prune.keep.within = "1y";
+      compression = "auto,zstd";
+      dateFormat = "+%Y-%m-%d";
+      archiveBaseName = "backup";
     };
   };
 }

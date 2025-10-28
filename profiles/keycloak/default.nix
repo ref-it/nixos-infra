@@ -28,6 +28,11 @@ in
         group = "root";
         mode = "0400";
       };
+      "borg-passphrase" = {
+        owner = "root";
+        group = "root";
+        mode = "0400";
+      };
       "tls-cert" = {
         owner = "root";
         group = "root";
@@ -56,6 +61,27 @@ in
       themes = with pkgs ; {
         stura = custom_keycloak_themes.stura;
       };
+    };
+
+    services.borgbackup.jobs.keycloak = {
+      user = "root";
+      group = "root";
+      repo = "ssh://backup:23/./keycloak";
+      readWritePaths = [ "/var/lib/keycloak/db-backup" ];
+      preHook = ''
+        cd /var/lib/keycloak
+        rm -f db-backup/*
+        ${pkgs.postgresql}/bin/pg_dump keycloak > db-backup/keycloak.sql
+      '';
+      paths = [ "db-backup" ];
+      doInit = false;
+      startAt = [ "*-*-* 03:30:00" ];
+      encryption.mode = "repokey";
+      encryption.passCommand = "cat ${config.sops.secrets."borg-passphrase".path}";
+      prune.keep.within = "1y";
+      compression = "auto,zstd";
+      dateFormat = "+%Y-%m-%d";
+      archiveBaseName = "backup";
     };
   };
 }

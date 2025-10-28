@@ -1,0 +1,35 @@
+:root {
+    --pf-v5-c-title--m-3xl--FontSize: 1.5rem;
+}
+
+.login-pf body {
+    background: #27272a url(../img/stura-background.svg) repeat-x 50%;
+    background-size: cover;
+}
+
+#kc-header {
+    background-image: url(../img/stura-logo-wide-white.svg);
+    background-size: contain;
+    height: 125px;
+    width: 100%;
+    margin-top: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+#kc-header-wrapper {
+    display: none;
+}
+
+.pf-v5-c-login__main {
+    border-radius: .5rem;
+}
+
+@media (min-width: 768px) {
+    div.pf-v5-c-login__main-header {
+        grid-template-columns: auto 130px;
+    }
+}
+
+.pf-v5-c-login__main-body {
+    padding-block-end: var(--pf-v5-c-login__main-header--PaddingTop);
+}

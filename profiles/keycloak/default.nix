@@ -53,6 +53,9 @@ in
         log-console-level = "debug";
         log-syslog-level = "debug";
       };
+      themes = with pkgs ; {
+        stura = custom_keycloak_themes.stura;
+      };
     };
   };
 }

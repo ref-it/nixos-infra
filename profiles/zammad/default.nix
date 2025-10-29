@@ -44,17 +44,17 @@ in
       secretKeyBaseFile = config.sops.secrets."zammad-secret-key".path;
     };
 
+    services.postgresqlBackup = {
+      enable = true;
+      startAt = "*-*-* 03:10:00";
+      databases = [ "zammad" ];
+    };
+
     services.borgbackup.jobs.zammad = {
       user = "root";
       group = "root";
       repo = "ssh://backup:23/./zammad";
-      readWritePaths = [ "/var/lib/zammad/db-backup" ];
-      preHook = ''
-        cd /var/lib/zammad
-        rm -f db-backup/*
-        ${pkgs.postgresql}/bin/pg_dump zammad > db-backup/zammad.sql
-      '';
-      paths = [ "config" "db-backup" ];
+      paths = [ "/var/lib/zammad/config" "/var/backup/postgresql/zammad.sql.gz" ];
       doInit = false;
       startAt = [ "*-*-* 03:40:00" ];
       encryption.mode = "repokey";

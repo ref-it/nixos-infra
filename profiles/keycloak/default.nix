@@ -60,17 +60,17 @@ in
       };
     };
 
+    services.postgresqlBackup = {
+      enable = true;
+      startAt = "*-*-* 03:00:00";
+      databases = [ "keycloak" ];
+    };
+
     services.borgbackup.jobs.keycloak = {
       user = "root";
       group = "root";
       repo = "ssh://backup:23/./keycloak";
-      readWritePaths = [ "/var/lib/keycloak/db-backup" ];
-      preHook = ''
-        cd /var/lib/keycloak
-        rm -f db-backup/*
-        ${pkgs.postgresql}/bin/pg_dump keycloak > db-backup/keycloak.sql
-      '';
-      paths = [ "db-backup" ];
+      paths = [ "/var/backup/postgresql/keycloak.sql.gz" ];
       doInit = false;
       startAt = [ "*-*-* 03:30:00" ];
       encryption.mode = "repokey";

@@ -162,10 +162,7 @@ in
       user = "root";
       group = "root";
       repo = "ssh://backup:23/./openldap";
-      preHook = ''
-        cd /var/lib/openldap
-      '';
-      paths = [ "data" ];
+      paths = [ "/var/lib/openldap" ];
       doInit = false;
       startAt = [ "*-*-* 05:00:00" ];
       encryption.mode = "repokey";

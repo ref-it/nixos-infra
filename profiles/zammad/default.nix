@@ -54,7 +54,7 @@ in
       user = "root";
       group = "root";
       repo = "ssh://backup:23/./zammad";
-      paths = [ "/var/lib/zammad/config" "/var/backup/postgresql/zammad.sql.gz" ];
+      paths = [ "/var/lib/zammad" "/var/backup/postgresql/zammad.sql.gz" ];
       doInit = false;
       startAt = [ "*-*-* 03:40:00" ];
       encryption.mode = "repokey";

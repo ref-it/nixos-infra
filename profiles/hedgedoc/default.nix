@@ -105,18 +105,18 @@ in
           };
         };
       };
+
+      postgresqlBackup = {
+        enable = true;
+        startAt = "*-*-* 03:10:00";
+        databases = [ "hedgedoc" ];
+      };
       
       borgbackup.jobs.hedgedoc = {
         user = "root";
         group = "root";
         repo = "ssh://backup:23/./hedgedoc";
-        readWritePaths = [ "/var/lib/hedgedoc/db-backup" ];
-        preHook = ''
-          cd /var/lib/hedgedoc
-          rm -f db-backup/*
-          ${pkgs.postgresql}/bin/pg_dump hedgedoc > db-backup/hedgedoc.sql
-        '';
-        paths = [ "uploads" "db-backup" ];
+        paths = [ "/var/lib/hedgedoc" "/var/backup/postgresql/hedgedoc.sql.gz" ];
         doInit = false;
         startAt = [ "*-*-* 03:30:00" ];
         encryption.mode = "repokey";

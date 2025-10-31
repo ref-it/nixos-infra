@@ -130,6 +130,13 @@
         {
           sources = [
             "tickets.stura-ilmenau.de"
+            "tickets.erstiwoche.de"
+            "tickets.fsr-ei.de"
+            "tickets.fsr-ia.de"
+            "tickets.fsr-mb.de"
+            "tickets.fsr-mn.de"
+            "tickets.fsr-wm.de"
+            "tickets.studierendenbeirat.de"
           ];
           target = "http://10.170.20.112";
         }

@@ -57,6 +57,9 @@ in
         };
       };
       environmentFile = "/var/lib/pretix.env";
+      plugins = with config.services.pretix.package.plugins; [
+        zugferd
+      ];
     };
 
     services.postgresqlBackup = {

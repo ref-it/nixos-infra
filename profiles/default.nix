@@ -9,7 +9,7 @@
     ./keycloak
     ./matrix
     ./nextcloud
-    ./nextcloud-kiste
+    ./opencloud-kiste
     ./openldap
     ./pretix
     ./reverse-proxy

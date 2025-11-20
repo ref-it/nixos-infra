@@ -27,6 +27,7 @@ inputs:
   gutemine = ./hosts/server/gutemine;
   majestix = ./hosts/server/majestix;
   miraculix = ./hosts/server/miraculix;
+  moralelastix = ./hosts/server/moralelastix;
   obelix = ./hosts/server/obelix;
   rohrpostix = ./hosts/server/rohrpostix;
   troubadix = ./hosts/server/troubadix;

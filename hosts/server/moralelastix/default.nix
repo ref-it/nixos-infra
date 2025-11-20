@@ -11,9 +11,9 @@
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
 
-    networking.hostName = "miraculix";
+    networking.hostName = "moralelastix";
 
-    base.primaryIP = "2001:638:904:ffd0::15";
+    base.primaryIP = "2001:638:904:ffd0::7";
 
     systemd.network = {
       enable = true;
@@ -24,7 +24,7 @@
             IPv6AcceptRA = false;
           };
           address = [
-            "2001:638:904:ffd0::15/64"
+            "2001:638:904:ffd0::12/64"
           ];
           gateway = [
             "2001:638:904:ffd0::1"
@@ -36,28 +36,32 @@
             IPv6AcceptRA = false;
           };
           address = [
-            "10.170.20.104/24"
-          ];
-          gateway = [
-            "10.170.20.1"
+            "10.170.20.109/24"
           ];
         };
       };
     };
 
-    networking.extraHosts = ''
-      2001:638:904:ffd0::24 ldap.stura-ilmenau.de
-    '';
-
     sops.defaultSopsFile = ./secrets.yaml;
 
-    profiles.zammad = {
-      enable = true;
-      bindHost = "0.0.0.0";
+    services.nginx = {
+      virtualHosts = {
+        "kiste.stura-ilmenau.de" = {
+          forceSSL = true;
+          enableACME = true;
+          locations = {
+            "/" = {
+              proxyPass = "http://";
+              recommendedProxySettings = true;
+            };
+          };
+        };
+      };
     };
 
-    environment.systemPackages = [
-      pkgs.rubyPackages.rails
-    ];
+    profiles.opencloud-kiste = {
+      enable = true;
+      fqdn = "kiste.stura-ilmenau.de";
+    };
   };
 }

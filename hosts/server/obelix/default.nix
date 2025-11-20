@@ -119,12 +119,7 @@
         "2001:638:904:ffd0::12"
       ];
     };
-
-    profiles.opencloud-kiste = {
-      enable = true;
-      fqdn = "kiste.stura-ilmenau.de";
-    };
-
+    
     profiles.collabora = {
       enable = true;
       fqdn = "office.stura-ilmenau.de";

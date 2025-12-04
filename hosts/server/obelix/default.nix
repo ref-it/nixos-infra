@@ -68,17 +68,6 @@
           enableACME = true;
         };
 
-        "kiste.stura-ilmenau.de" = {
-          forceSSL = true;
-          enableACME = true;
-          locations = {
-            "/" = {
-              proxyPass = "https://10.170.20.109";
-              recommendedProxySettings = true;
-            };
-          };
-        };
-
         "auth.stura-ilmenau.de" = {
           forceSSL = true;
           enableACME = true;

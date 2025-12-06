@@ -85,8 +85,16 @@ in
         maintenance_window_start = "2";
         trusted_proxies = cfg.trustedProxies;
         default_phone_region = "DE";
-        sharing.enable_share_accept = false;
-        sharing.force_share_accept = false;
+        sharing = {
+          enable_share_accept = false;
+          force_share_accept = false;
+        };
+        redis = {
+          host = config.services.redis.servers.nextcloud.bind;
+          port = config.services.redis.servers.nextcloud.port;
+          dbindex = 0;
+          timeout = 1.5;
+        };
       };
       config = {
         dbtype = "mysql";
@@ -96,6 +104,16 @@ in
         adminpassFile = config.sops.secrets."nc-init-pw".path;
         dbhost = "localhost:/run/mysqld/mysqld.sock";
       };
+      caching = {
+        redis = true;
+        memcached = true;
+      };
+    };
+
+    services.redis.servers.nextcloud = {
+      enable = true;
+      bind = "::1";
+      port = 6379;
     };
 
     services.borgbackup.jobs.nextcloud = {

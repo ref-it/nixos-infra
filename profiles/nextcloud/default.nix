@@ -72,14 +72,6 @@ in
       autoUpdateApps.enable = true;
       configureRedis = true;
       maxUploadSize = "2048M";
-      phpOptions = {
-        "pm.max_children" = "224";
-        "pm.start_servers" = "56";
-        "pm.min_spare_servers" = "56";
-        "pm.max_spare_servers" = "168";
-        "opcache.interned_strings_buffer" = "64";
-        "opcache.memory_consumption" = "1024";
-      };
       settings = {
         trusted_domains = cfg.extraDomains;
         maintenance_window_start = "2";
@@ -88,12 +80,6 @@ in
         sharing = {
           enable_share_accept = false;
           force_share_accept = false;
-        };
-        redis = {
-          host = config.services.redis.servers.nextcloud.bind;
-          port = config.services.redis.servers.nextcloud.port;
-          dbindex = 0;
-          timeout = 1.5;
         };
       };
       config = {
@@ -108,12 +94,6 @@ in
         redis = true;
         memcached = true;
       };
-    };
-
-    services.redis.servers.nextcloud = {
-      enable = true;
-      bind = "::1";
-      port = 6379;
     };
 
     services.borgbackup.jobs.nextcloud = {

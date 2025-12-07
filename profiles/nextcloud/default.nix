@@ -72,6 +72,10 @@ in
       autoUpdateApps.enable = true;
       configureRedis = true;
       maxUploadSize = "2048M";
+      phpOptions = {
+        "opcache.interned_strings_buffer" = "64";
+        "opcache.memory_consumption" = "1024";
+      };
       settings = {
         trusted_domains = cfg.extraDomains;
         maintenance_window_start = "2";
@@ -81,6 +85,17 @@ in
           enable_share_accept = false;
           force_share_accept = false;
         };
+        user_oidc = {
+          enrich_login_id_token_with_userinfo = true;
+        };
+        mail_sendmailmode = "smtp";
+        mail_smtpmode = "smtp";
+        mail_smtphost = "imap.fem.tu-ilmenau.de";
+        mail_smtpport = 587;
+        mail_from_address = "cloud";
+        mail_domain = "stura-ilmenau.de";
+        mail_smtpauth = true;
+        mail_smtpname = "cloud@stura-ilmenau.de";
       };
       config = {
         dbtype = "mysql";
@@ -93,6 +108,10 @@ in
       caching = {
         redis = true;
         memcached = true;
+      };
+      extraAppsEnable = true;
+      extraApps = with config.services.nextcloud.package.packages.apps; {
+        inherit calendar contacts deck forms notify_push polls richdocuments tasks user_oidc;
       };
     };
 

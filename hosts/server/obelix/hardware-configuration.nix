@@ -11,18 +11,14 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/50d0394c-7c29-4fd3-b988-eb58fb6c00bf";
+    { device = "/dev/disk/by-uuid/10d9fd17-39cd-4277-87bb-1b5b4fddd9e3";
       fsType = "btrfs";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/83D7-A803";
+    { device = "/dev/disk/by-uuid/C70D-E4BF";
       fsType = "vfat";
-    };
-
-  fileSystems."/var/lib/mysql" =
-    { device = "/dev/disk/by-uuid/014eb342-7855-4990-8d58-dcbb947b70a7";
-      fsType = "btrfs";
+      options = [ "fmask=0022" "dmask=0022" ];
     };
 
   fileSystems."/var/lib/nextcloud" =
@@ -30,14 +26,12 @@
       fsType = "btrfs";
     };
 
-  swapDevices = [ ];
+  fileSystems."/var/lib/mysql" =
+    { device = "/dev/disk/by-uuid/014eb342-7855-4990-8d58-dcbb947b70a7";
+      fsType = "btrfs";
+    };
 
-  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
-  # (the default) this is the recommended approach. When using systemd-networkd it's
-  # still possible to use this option, but it's recommended to use it in conjunction
-  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
-  networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.ens18.useDHCP = lib.mkDefault true;
+  swapDevices = [ ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }

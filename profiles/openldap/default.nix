@@ -88,6 +88,7 @@ in
                 "ppolicy"
                 "argon2"
                 "dynlist"
+                "sssvlv"
               ];
             };
           };

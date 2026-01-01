@@ -6,7 +6,6 @@ keys:
   - &srv_gutemine age1jrdgsnxl0jqzdu7nk20ey97kehkcy57m6c7ww5au3nrw6vwyk9xq87jxgk
   - &srv_majestix age1es4y3s8sh0c67u3zsj72cvvfwcnx9ty7482w22dj8ajvngnatdtqx0gfdt
   - &srv_miraculix age1j78d0nj0jr7xk5mmgwcepjm7zrj0nun9t8meht3qrq5ywqqqudhs6syp5v
-  - &srv_moralelastix age13f3yj47xps66xya6ksc7wzq63epn5avch996wuuscmqmhh7lefrselzepy
   - &srv_obelix age16puy5p629xl5r8fqm87vl70mf4dnhv6p7v3f5nhkv9sux5kwpfwst4mu77
   - &srv_troubadix age1k0njnn7z8l3j600hhaux5fu0hy2gulp9kj4crauvsxzswt0pcddsu8pcl4
   - &srv_verliernix age1z0uzlmz2gpcqaw42jmr3xremvdpgasz4mwy273pwv77hrfxzr36s8cp2fq
@@ -44,13 +43,6 @@ creation_rules:
     key_groups:
       - age:
         - *srv_miraculix
-        - *admin_schlagma
-        pgp:
-        - *admin_netali
-  - path_regex: hosts/server/moralelastix/secrets.yaml$
-    key_groups:
-      - age:
-        - *srv_moralelastix
         - *admin_schlagma
         pgp:
         - *admin_netali

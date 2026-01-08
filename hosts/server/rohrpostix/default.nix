@@ -55,10 +55,46 @@
     };
 
     services.nginx = {
-      virtualHosts."matrix-admin.stura.eu" = {
-        enableACME = true;
-        forceSSL = true;
-        locations."/".root = pkgs.synapse-admin;
+      virtualHosts = {
+        "help.stura-ilmenau.de" = {
+          enableACME = true;
+          forceSSL = true;
+          locations = {
+            "/" = {
+              proxyPass = "http://10.170.20.104:3000";
+              recommendedProxySettings = true;
+              extraConfig = ''
+                proxy_set_header CLIENT_IP $remote_addr;
+              '';
+            };
+            "/ws" = {
+              proxyPass = "http://10.170.20.104:6042";
+              recommendedProxySettings = true;
+              proxyWebsockets = true;
+            };
+            "/cable" = {
+              proxyPass = "http://10.170.20.104:6042";
+              recommendedProxySettings = true;
+              proxyWebsockets = true;
+            };
+          };
+        };
+        "pad1.stura-ilmenau.de" = {
+          enableACME = true;
+          forceSSL = true;
+          locations = {
+            "/" = {
+              proxyPass = "https://pad2.stura-ilmenau.de/";
+              recommendedProxySettings = true;
+              proxyWebsockets = true;
+            };
+          };
+        };
+        "matrix-admin.stura.eu" = {
+          enableACME = true;
+          forceSSL = true;
+          locations."/".root = pkgs.synapse-admin;
+        };
       };
     };
 
@@ -93,20 +129,6 @@
             proxy_set_header X-Forwarded-For $remote_addr;
             proxy_set_header X-Forwarded-Proto $scheme;
           '';
-        }
-        {
-          sources = [
-            "help.stura-ilmenau.de"
-          ];
-          target = "http://10.170.20.104:3000";
-          extraConfig = ''
-            proxy_set_header CLIENT_IP $remote_addr;
-          '';
-          websocket = {
-            enable = true;
-            target = "http://10.170.20.104:6042";
-            locations = [ "/ws" "/cable" ];
-          };
         }
         {
           sources = [

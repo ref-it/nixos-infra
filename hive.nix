@@ -6,7 +6,9 @@ inputs:
 
     nixpkgs = import inputs.nixpkgs {
       system = "x86_64-linux";
-      overlays = [];
+      overlays = [
+        (final: prev: { inherit (import inputs.nixpkgs-unstable { system = prev.system; }) vaultwarden; })
+      ];
     };
 
     specialArgs = { inherit inputs; };

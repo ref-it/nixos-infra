@@ -86,6 +86,7 @@ in
           force_share_accept = false;
         };
         user_oidc = {
+          auto_provision = false;
           enrich_login_id_token_with_userinfo = true;
         };
         mail_sendmailmode = "smtp";
@@ -96,6 +97,7 @@ in
         mail_domain = "stura-ilmenau.de";
         mail_smtpauth = true;
         mail_smtpname = "cloud@stura-ilmenau.de";
+        "simpleSignUpLink.shown" = false;
       };
       config = {
         dbtype = "mysql";

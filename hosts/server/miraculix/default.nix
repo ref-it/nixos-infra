@@ -56,8 +56,34 @@
       bindHost = "0.0.0.0";
     };
 
+    services.nginx = {
+      virtualHosts = {
+        "help.stura-ilmenau.de" = {
+          locations = {
+            "/" = {
+              proxyPass = "http://0.0.0.0:3000";
+              recommendedProxySettings = true;
+              extraConfig = ''
+                proxy_set_header CLIENT_IP $remote_addr;
+              '';
+            };
+            "/ws" = {
+              proxyPass = "http://0.0.0.0:6042";
+              recommendedProxySettings = true;
+              proxyWebsockets = true;
+            };
+            "/cable" = {
+              proxyPass = "http://0.0.0.0:6042";
+              recommendedProxySettings = true;
+              proxyWebsockets = true;
+            };
+          };
+        };
+      };
+    };
+    
     environment.systemPackages = [
-      pkgs.rubyPackages.rails
+      pkgs.git
     ];
   };
 }

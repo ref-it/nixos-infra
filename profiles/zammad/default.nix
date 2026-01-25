@@ -38,6 +38,39 @@ in
       };
     };
 
+    systemd.services = {
+      "zammad-conf-ticket-default-type" = {
+        wantedBy = [ "zammad-web.service" ];
+        after = [ "zammad-web.service" ];
+        environment = {
+          RAILS_ENV = "production";
+          RAILS_LOG_TO_STDOUT = "true";
+        };
+        serviceConfig = {
+          Type = "oneshot";
+          WorkingDirectory = "${pkgs.zammad}";
+          ExecStart = ''${pkgs.zammad}/bin/rails r "Setting.set('ui_ticket_create_default_type', 'email-out')"'';
+          Group = "zammad";
+          User = "zammad";
+        };
+      };
+      "zammad-conf-select-customer-with-email" = {
+        wantedBy = [ "zammad-web.service" ];
+        after = [ "zammad-web.service" ];
+        environment = {
+          RAILS_ENV = "production";
+          RAILS_LOG_TO_STDOUT = "true";
+        };
+        serviceConfig = {
+          Type = "oneshot";
+          WorkingDirectory = "${pkgs.zammad}";
+          ExecStart = ''${pkgs.zammad}/bin/rails r "Setting.set('ui_user_organization_selector_with_email', true)"'';
+          Group = "zammad";
+          User = "zammad";
+        };
+      };
+    };
+
     services.zammad = {
       enable = true;
       host = cfg.bindHost;

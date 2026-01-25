@@ -69,6 +69,21 @@ in
           User = "zammad";
         };
       };
+      "zammad-conf-table-group-by-show-count" = {
+        wantedBy = [ "zammad-web.service" ];
+        after = [ "zammad-web.service" ];
+        environment = {
+          RAILS_ENV = "production";
+          RAILS_LOG_TO_STDOUT = "true";
+        };
+        serviceConfig = {
+          Type = "oneshot";
+          WorkingDirectory = "${pkgs.zammad}";
+          ExecStart = ''${pkgs.zammad}/bin/rails r "Setting.set('ui_table_group_by_show_count', true)"'';
+          Group = "zammad";
+          User = "zammad";
+        };
+      };
     };
 
     services.zammad = {

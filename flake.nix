@@ -14,7 +14,7 @@
 
     colmena = import ./hive.nix inputs;
     colmenaHive = colmena.lib.makeHive self.outputs.colmena;
-    nixosConfigurations = (colmena.lib.makeHive self.outputs.colmena).nodes;
+    nixosConfigurations = (self.outputs.colmenaHive).nodes;
 
   } // flake-utils.lib.eachDefaultSystem (system: let
     pkgs = nixpkgs.legacyPackages.${system};
@@ -22,7 +22,7 @@
     devShells.default = pkgs.mkShell {
       name = "stura-nixfiles-shell";
       buildInputs = [
-        pkgs.sops
+        sops.nixosModules.sops
         colmena.defaultPackage.${system}
         pkgs.ssh-to-age
       ];

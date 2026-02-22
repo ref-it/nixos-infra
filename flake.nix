@@ -6,14 +6,15 @@
     sops.url = "github:Mic92/sops-nix";
     sops.inputs.nixpkgs.follows = "nixpkgs";
     flake-utils.url = "github:numtide/flake-utils";
-    colmena.url = "github:zhaofengli/colmena/stable";
+    colmena.url = "github:zhaofengli/colmena";
     colmena.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, colmena, sops, flake-utils, ... }@inputs: {
 
     colmena = import ./hive.nix inputs;
-    nixosConfigurations = (colmena.lib.makeHive self.outputs.colmena).nodes;
+    colmenaHive = colmena.lib.makeHive self.outputs.colmena;
+    nixosConfigurations = (self.outputs.colmenaHive).nodes;
 
   } // flake-utils.lib.eachDefaultSystem (system: let
     pkgs = nixpkgs.legacyPackages.${system};
@@ -21,8 +22,8 @@
     devShells.default = pkgs.mkShell {
       name = "stura-nixfiles-shell";
       buildInputs = [
-        pkgs.sops
-        pkgs.colmena
+        sops.nixosModules.sops
+        colmena.defaultPackage.${system}
         pkgs.ssh-to-age
       ];
     };

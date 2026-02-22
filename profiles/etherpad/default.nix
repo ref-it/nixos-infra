@@ -51,7 +51,7 @@ in
         Restart = "always";
       };
       wantedBy = [ "default.target" ];
-      after = [ "mysql.service" ]
+      after = [ "mysql.service" ];
     };
 
     services = {

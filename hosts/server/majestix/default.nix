@@ -6,14 +6,14 @@
   ];
 
   config = {
-    system.stateVersion = "23.11";
+    system.stateVersion = "23.05";
 
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
 
-    networking.hostName = "rohrpostix";
+    networking.hostName = "majestix";
 
-    base.primaryIP = "2001:638:904:ffd0::6";
+    base.primaryIP = "2001:638:904:ffd0::13";
 
     systemd.network = {
       enable = true;
@@ -24,7 +24,7 @@
             IPv6AcceptRA = false;
           };
           address = [
-            "2001:638:904:ffd0::6/64"
+            "2001:638:904:ffd0::13/64"
           ];
           gateway = [
             "2001:638:904:ffd0::1"
@@ -36,290 +36,24 @@
             IPv6AcceptRA = false;
           };
           address = [
-            "141.24.220.141/26"
+            "10.170.20.106/24"
           ];
           gateway = [
-            "141.24.220.190"
-          ];
-        };
-        "60-ens20" = {
-          name = "ens20";
-          networkConfig = {
-            IPv6AcceptRA = false;
-          };
-          address = [
-            "10.170.20.105/24"
+            "10.170.20.1"
           ];
         };
       };
     };
 
-    services.nginx = {
-      virtualHosts = {
-        "auth.stura-ilmenau.de" = {
-          forceSSL = true;
-          enableACME = true;
-          extraConfig = ''
-            set_real_ip_from 0.0.0.0/0;
-            real_ip_header X-Real-IP;
-            real_ip_recursive on;
-          '';
-          locations = {
-            "/" = {
-              proxyPass = "https://10.170.20.106";
-              extraConfig = ''
-                proxy_redirect off;
-                proxy_set_header Host $host;
-                proxy_set_header X-Real-IP $remote_addr;
-                proxy_set_header X-Forwarded-For $remote_addr;
-                proxy_set_header X-Forwarded-Proto $scheme;
-                proxy_set_header X-Forwarded-Port 443;
-              '';
-            };
-            "/admin" = {
-              proxyPass = "https://10.170.20.106";
-              extraConfig = ''
-                allow 141.24.0.0/16;
-                allow 2001:638:904::/48;
-                deny all;
-              '';
-            };
-          };
-        };
-        "help.stura-ilmenau.de" = {
-          enableACME = true;
-          forceSSL = true;
-          locations = {
-            "/" = {
-              proxyPass = "http://10.170.20.104:3000";
-              recommendedProxySettings = true;
-              extraConfig = ''
-                proxy_set_header CLIENT_IP $remote_addr;
-              '';
-            };
-            "/ws" = {
-              proxyPass = "http://10.170.20.104:6042";
-              recommendedProxySettings = true;
-              proxyWebsockets = true;
-            };
-            "/cable" = {
-              proxyPass = "http://10.170.20.104:6042";
-              recommendedProxySettings = true;
-              proxyWebsockets = true;
-            };
-          };
-        };
-        "pad1.stura-ilmenau.de" = {
-          enableACME = true;
-          forceSSL = true;
-          locations = {
-            "/" = {
-              proxyPass = "https://pad2.stura-ilmenau.de/";
-              recommendedProxySettings = true;
-              proxyWebsockets = true;
-              extraConfig = ''
-                proxy_buffering off;
-                proxy_pass_header Server;
-                proxy_redirect default;
-                client_max_body_size 10m;
-                client_body_buffer_size 128k;
-                proxy_connect_timeout 90;
-                proxy_send_timeout 90;
-                proxy_read_timeout 90;
-                proxy_buffer_size 4k;
-                proxy_buffers 4 32k;
-                proxy_busy_buffers_size 64k;
-                proxy_temp_file_write_size 64k;
-              '';
-            };
-          };
-        };
-        "matrix-admin.stura.eu" = {
-          enableACME = true;
-          forceSSL = true;
-          locations."/".root = pkgs.synapse-admin;
-        };
-      };
-    };
+    networking.extraHosts = ''
+      2001:638:904:ffd0::24 ldap.stura-ilmenau.de
+    '';
 
-    profiles.reverse-proxy = {
+    sops.defaultSopsFile = ./secrets.yaml;
+
+    profiles.keycloak = {
       enable = true;
-      allowedIPs = [
-        "141.24.44.128/25"
-        "2001:638:904:ffd0::/64"
-      ];
-      httpProxy = [
-        {
-          sources = [
-            "ep.stura-ilmenau.de"
-            "ep.erstiwiki.de"
-          ];
-          target = "https://10.170.20.114";
-        }
-        {
-          sources = [
-            "hedgedoc.stura-ilmenau.de"
-          ];
-          target = "https://10.170.20.114";
-        }
-        {
-          sources = [
-            "helfer.stura-ilmenau.de"
-            "helfer.erstiwoche.de"
-            "helfer.fsr-ia.de"
-          ];
-          target = "https://10.170.20.111";
-          extraConfig = ''
-            proxy_set_header X-Forwarded-For $remote_addr;
-            proxy_set_header X-Forwarded-Proto $scheme;
-          '';
-        }
-        {
-          sources = [
-            "infoscreen.stura-ilmenau.de"
-          ];
-          target = "http://10.170.20.113";
-        }
-        {
-          sources = [
-            "matrix.stura.eu"
-          ];
-          unrestrictedLocations = [ "~ ^(/_matrix|/_synapse/client|/_synapse/admin)" ];
-          target = "http://10.170.20.107:8008";
-        }
-        {
-          sources = [
-            "projects.stura-ilmenau.de"
-          ];
-          target = "http://10.170.20.110";
-        }
-        {
-          sources = [
-            "tickets.stura-ilmenau.de"
-            "tickets.erstiwoche.de"
-            "tickets.fsr-ei.de"
-            "tickets.fsr-ia.de"
-            "tickets.fsr-mb.de"
-            "tickets.fsr-mn.de"
-            "tickets.fsr-wm.de"
-            "tickets.studierendenbeirat.de"
-          ];
-          target = "http://10.170.20.112";
-        }
-        {
-          sources = [
-            "vault.stura-ilmenau.de"
-          ];
-          target = "https://10.170.20.120";
-          websocket = {
-            enable = true;
-            target = "https://10.170.20.120";
-            locations = [ "/" ];
-          };
-        }
-      ];
-      redirectPermanent = [
-        {
-          sources = [
-            "stura.tu-ilmenau.de"
-            "www.stura.tu-ilmenau.de"
-          ];
-          target = "www.stura-ilmenau.de";
-        }
-        {
-          sources = [
-            "cloud.stura.eu"
-            "cloud.stura.tu-ilmenau.de"
-          ];
-          target = "cloud.stura-ilmenau.de";
-        }
-        {
-          sources = [
-            "fachschaftsrat-ei.de"
-            "www.fachschaftsrat-ei.de"
-          ];
-          target = "fsr-ei.de";
-        }
-        {
-          sources = [
-            "fachschaftsrat-mb.de"
-            "www.fachschaftsrat-mb.de"
-          ];
-          target = "fsr-mb.de";
-        }
-        {
-          sources = [
-            "fachschaftsrat-mn.de"
-            "www.fachschaftsrat-mn.de"
-          ];
-          target = "fsr-mn.de";
-        }
-        {
-          sources = [
-            "fachschaftsrat-wm.de"
-            "www.fachschaftsrat-wm.de"
-          ];
-          target = "fsr-wm.de";
-        }
-        {
-          sources = [
-            "finanzen.stura.eu"
-          ];
-          target = "finanzen.stura-ilmenau.de";
-        }
-        {
-          sources = [
-            "helfer.stura.tu-ilmenau.de"
-            "helper.stura.tu-ilmenau.de"
-          ];
-          target = "helfer.stura-ilmenau.de";
-        }
-        {
-          sources = [
-            "protokoll.stura.tu-ilmenau.de"
-          ];
-          target = "protokoll.stura-ilmenau.de";
-        }
-        {
-          sources = [
-            "stubra.de"
-            "www.stubra.de"
-            "studentenbeirat.de"
-            "www.studentenbeirat.de"
-          ];
-          target = "studierendenbeirat.de";
-        }
-        {
-          sources = [
-            "wahlen.stura.tu-ilmenau.de"
-          ];
-          target = "wahlen.stura-ilmenau.de";
-        }
-        {
-          sources = [
-            "wiki.stura.tu-ilmenau.de"
-          ];
-          target = "wiki.stura-ilmenau.de";
-        }
-        {
-          sources = [
-            "fh-ilmenau.de"
-            "www.fh-ilmenau.de"
-            "th-ilmenau.de"
-            "www.th-ilmenau.de"
-            "studis-gegen-rechtsextremismus.de"
-            "www.studis-gegen-rechtsextremismus.de"
-          ];
-          target = "www.stura-ilmenau.de";
-        }
-      ];
-      streamProxy = [
-        {
-          proto = "tcp";
-          port = 1022;
-          target = "10.170.20.101:22";
-        }
-      ];
+      fqdn = "auth.stura-ilmenau.de";
     };
   };
 }

@@ -3,10 +3,11 @@ keys:
   - &admin_schlagma age1ncc0ukuqyeq8uzcvy2x0cymykrmnhzymgk22kvt7dvz99prjsysqjxgz9g
   - &srv_automatix age1ss4mpym5gkgzqmjht0unpggjxz4w392n94afx4zglw27yj8ny9nq9rxx88
   - &srv_grautvornix age1570w8z3cdn9ygjjupcyxjjn77g8d4me9s9na3uram5039kljsp3q4jrw0m
-  - &srv_gutemine age1jrdgsnxl0jqzdu7nk20ey97kehkcy57m6c7ww5au3nrw6vwyk9xq87jxgk
-  - &srv_majestix age1es4y3s8sh0c67u3zsj72cvvfwcnx9ty7482w22dj8ajvngnatdtqx0gfdt
+  - &srv_gutemine age1njs27c6tx64s8g5uu9jufenutagya8x2f4pnynjcgxzw8yx9sufs68epya
+  - &srv_majestix age1g6ygkqrtaz4jcjalndjvmepraf3sl0sr9e9zdth4x6frggfuhp9savtdls
   - &srv_miraculix age1j78d0nj0jr7xk5mmgwcepjm7zrj0nun9t8meht3qrq5ywqqqudhs6syp5v
   - &srv_obelix age16puy5p629xl5r8fqm87vl70mf4dnhv6p7v3f5nhkv9sux5kwpfwst4mu77
+  - &srv_obelus age1jx4wk4x6dexkw97exr2e2q2sdue68k970dcr543j98t6yc2mfa2qyev4pu
   - &srv_troubadix age1k0njnn7z8l3j600hhaux5fu0hy2gulp9kj4crauvsxzswt0pcddsu8pcl4
   - &srv_verliernix age1z0uzlmz2gpcqaw42jmr3xremvdpgasz4mwy273pwv77hrfxzr36s8cp2fq
 
@@ -53,6 +54,13 @@ creation_rules:
         - *admin_schlagma
         pgp:
         - *admin_netali
+  - path_regex: hosts/server/obelus/secrets.yaml$
+    key_groups:
+      - age:
+        - *srv_obelus
+        - *admin_schlagma
+        pgp:
+        - *admin_netali
   - path_regex: hosts/server/troubadix/secrets.yaml$
     key_groups:
       - age:
@@ -67,4 +75,3 @@ creation_rules:
         - *admin_schlagma
         pgp:
         - *admin_netali
-

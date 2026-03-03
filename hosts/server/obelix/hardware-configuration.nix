@@ -22,12 +22,12 @@
     };
 
   fileSystems."/var/lib/nextcloud" =
-    { device = "/dev/disk/by-uuid/cc77aeff-295a-482a-b9ad-9b37a016ec3c";
+    { device = "/dev/disk/by-uuid/eefc2a59-96e1-473e-890d-4b51dd5a8681";
       fsType = "btrfs";
     };
 
-  fileSystems."/var/lib/mysql" =
-    { device = "/dev/disk/by-uuid/014eb342-7855-4990-8d58-dcbb947b70a7";
+  fileSystems."/var/lib/postgresql" =
+    { device = "/dev/disk/by-uuid/98418e49-0207-4a50-8881-3da69bbb18c3";
       fsType = "btrfs";
     };
 

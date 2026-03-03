@@ -4,7 +4,6 @@ keys:
   - &srv_automatix age1ss4mpym5gkgzqmjht0unpggjxz4w392n94afx4zglw27yj8ny9nq9rxx88
   - &srv_grautvornix age1570w8z3cdn9ygjjupcyxjjn77g8d4me9s9na3uram5039kljsp3q4jrw0m
   - &srv_gutemine age1jrdgsnxl0jqzdu7nk20ey97kehkcy57m6c7ww5au3nrw6vwyk9xq87jxgk
-  - &srv_majestix age1es4y3s8sh0c67u3zsj72cvvfwcnx9ty7482w22dj8ajvngnatdtqx0gfdt
   - &srv_miraculix age1j78d0nj0jr7xk5mmgwcepjm7zrj0nun9t8meht3qrq5ywqqqudhs6syp5v
   - &srv_obelix age16puy5p629xl5r8fqm87vl70mf4dnhv6p7v3f5nhkv9sux5kwpfwst4mu77
   - &srv_troubadix age1k0njnn7z8l3j600hhaux5fu0hy2gulp9kj4crauvsxzswt0pcddsu8pcl4
@@ -29,13 +28,6 @@ creation_rules:
     key_groups:
       - age:
         - *srv_gutemine
-        - *admin_schlagma
-        pgp:
-        - *admin_netali
-  - path_regex: hosts/server/majestix/secrets.yaml$
-    key_groups:
-      - age:
-        - *srv_majestix
         - *admin_schlagma
         pgp:
         - *admin_netali

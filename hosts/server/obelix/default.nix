@@ -82,6 +82,7 @@
       enable = true;
       fqdn = "office.stura-ilmenau.de";
       trustedHosts = [
+        "cloud.old.stura.eu"
         "cloud.stura-ilmenau.de"
         "2001:638:904:ffd0::12"
       ];

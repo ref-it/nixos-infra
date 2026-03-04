@@ -7,7 +7,6 @@ inputs:
     nixpkgs = import inputs.nixpkgs {
       system = "x86_64-linux";
       overlays = [
-        (final: prev: { inherit (import inputs.nixpkgs-unstable { system = prev.stdenv.hostPlatform.system; }) nextcloud33; })
         (final: prev: { inherit (import inputs.nixpkgs-unstable { system = prev.stdenv.hostPlatform.system; }) vaultwarden; })
       ];
     };

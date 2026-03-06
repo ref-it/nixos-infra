@@ -36,7 +36,10 @@
             IPv6AcceptRA = false;
           };
           address = [
-            "10.170.20.103/24"
+            "141.24.220.139/26"
+          ];
+          gateway = [
+            "141.24.220.190"
           ];
         };
         "60-ens20" = {
@@ -45,10 +48,7 @@
             IPv6AcceptRA = false;
           };
           address = [
-            "141.24.220.139/26"
-          ];
-          gateway = [
-            "141.24.220.190"
+            "10.170.20.103/24"
           ];
         };
       };
@@ -63,26 +63,18 @@
           enableACME = true;
           globalRedirect = "cloud.stura-ilmenau.de";
         };
-        "cloud.stura-ilmenau.de" = {
-          forceSSL = true;
-          enableACME = true;
-        };
       };
     };
 
     profiles.nextcloud = {
       enable = true;
       fqdn = "cloud.stura-ilmenau.de";
-      trustedProxies = [
-        "2001:638:904:ffd0::12"
-      ];
     };
     
     profiles.collabora = {
       enable = true;
       fqdn = "office.stura-ilmenau.de";
       trustedHosts = [
-        "cloud.old.stura.eu"
         "cloud.stura-ilmenau.de"
         "2001:638:904:ffd0::12"
       ];

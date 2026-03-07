@@ -100,5 +100,26 @@ in
         inherit calendar contacts deck forms groupfolders notify_push polls richdocuments tasks user_oidc;
       };
     };
+
+    services.postgresqlBackup = {
+      enable = true;
+      startAt = "*-*-* 03:45:00";
+      databases = [ "nextcloud" ];
+    };
+
+    services.borgbackup.jobs.nextcloud = {
+      user = "root";
+      group = "root";
+      repo = "ssh://backup:23/./cloud";
+      paths = [ "/var/lib/nextcloud" "/var/backup/postgresql/nextcloud.sql.gz" ];
+      doInit = false;
+      startAt = [ "*-*-* 04:00:00" ];
+      encryption.mode = "repokey";
+      encryption.passCommand = "cat ${config.sops.secrets."borg-passphrase".path}";
+      prune.keep.within = "1y";
+      compression = "auto,zstd";
+      dateFormat = "+%Y-%m-%d";
+      archiveBaseName = "backup";
+    };
   };
 }

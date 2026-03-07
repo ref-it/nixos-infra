@@ -84,6 +84,7 @@ in
         mail_smtpauth = true;
         mail_smtpname = "cloud@stura-ilmenau.de";
         "simpleSignUpLink.shown" = false;
+        serverid = 1;
       };
       config = {
         adminuser = "admin";

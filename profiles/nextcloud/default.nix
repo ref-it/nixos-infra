@@ -49,6 +49,11 @@ in
       };
     };
 
+    services.nginx.virtualHosts."${cfg.fqdn}" = {
+      forceSSL = true;
+      enableACME = true;
+    };
+
     services.nextcloud = {
       enable = true;
       package = pkgs.nextcloud33;

@@ -63,10 +63,6 @@
           enableACME = true;
           globalRedirect = "cloud.stura-ilmenau.de";
         };
-        "cloud.stura-ilmenau.de" = {
-          forceSSL = true;
-          enableACME = true;
-        };
       };
     };
 

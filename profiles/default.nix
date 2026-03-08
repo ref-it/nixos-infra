@@ -9,6 +9,7 @@
     ./keycloak
     ./matrix
     ./nextcloud
+    ./nextcloud-calendar
     ./opencloud-kiste
     ./openldap
     ./pretix

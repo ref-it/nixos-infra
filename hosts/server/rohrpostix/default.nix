@@ -151,6 +151,12 @@
       httpProxy = [
         {
           sources = [
+            "cal.stura-ilmenau.de"
+          ];
+          target = "http://10.170.20.121";
+        }
+        {
+          sources = [
             "ep.stura-ilmenau.de"
             "ep.erstiwiki.de"
           ];

@@ -182,12 +182,6 @@
         }
         {
           sources = [
-            "infoscreen.stura-ilmenau.de"
-          ];
-          target = "http://10.170.20.113";
-        }
-        {
-          sources = [
             "matrix.stura.eu"
           ];
           unrestrictedLocations = [ "~ ^(/_matrix|/_synapse/client|/_synapse/admin)" ];
@@ -288,15 +282,6 @@
         }
         {
           sources = [
-            "stubra.de"
-            "www.stubra.de"
-            "studentenbeirat.de"
-            "www.studentenbeirat.de"
-          ];
-          target = "studierendenbeirat.de";
-        }
-        {
-          sources = [
             "wahlen.stura.tu-ilmenau.de"
           ];
           target = "wahlen.stura-ilmenau.de";
@@ -306,17 +291,6 @@
             "wiki.stura.tu-ilmenau.de"
           ];
           target = "wiki.stura-ilmenau.de";
-        }
-        {
-          sources = [
-            "fh-ilmenau.de"
-            "www.fh-ilmenau.de"
-            "th-ilmenau.de"
-            "www.th-ilmenau.de"
-            "studis-gegen-rechtsextremismus.de"
-            "www.studis-gegen-rechtsextremismus.de"
-          ];
-          target = "www.stura-ilmenau.de";
         }
       ];
       streamProxy = [

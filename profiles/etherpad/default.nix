@@ -46,12 +46,18 @@ in
       description = "Etherpad Lite, the collaborative editor.";
       serviceConfig = {
         Type = "simple";
-        WorkingDirectory = "/var/etherpad";
-        ExecStart = "pnpm run prod";
+        WorkingDirectory = "/var/lib/etherpad-lite";
+        ExecStart = "${pkgs.pnpm}/bin/pnpm run prod";
         Restart = "always";
+        User = "etherpad";
+        Group = "etherpad";
+        Environment = [
+          "NODE_ENV=production"
+          "PATH=${pkgs.nodejs_24}/bin:${pkgs.pnpm}/bin:/run/current-system/sw/bin"
+        ];
       };
-      wantedBy = [ "default.target" ];
-      after = [ "mysql.service" ];
+      after = [ "syslog.target" "network.target" ];
+      wantedBy = [ "multi-user.target" ];
     };
 
     services = {
@@ -73,8 +79,17 @@ in
       };
     };
 
+    users.users.etherpad = {
+      isNormalUser = true;
+      home = "/var/lib/etherpad-lite";
+    };
+
+    users.groups.etherpad.members = [ "etherpad" ];
+
     environment.systemPackages = [
-      pkgs.etherpad-lite
+      pkgs.git
+      pkgs.nodejs_24
+      pkgs.pnpm
     ];
   };
 }

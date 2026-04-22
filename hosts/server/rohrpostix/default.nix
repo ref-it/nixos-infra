@@ -128,6 +128,12 @@
         }
         {
           sources = [
+            "events.stura-ilmenau.de"
+          ];
+          target = "http://10.170.20.121";
+        }
+        {
+          sources = [
             "hedgedoc.stura-ilmenau.de"
           ];
           target = "https://10.170.20.114";

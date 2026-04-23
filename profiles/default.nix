@@ -7,6 +7,7 @@
     ./hedgedoc
     ./httpd-php
     ./keycloak
+    ./lauti
     ./matrix
     ./nextcloud
     ./nextcloud-calendar

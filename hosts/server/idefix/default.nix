@@ -51,5 +51,10 @@
         "10.170.20.105"
       ];
     };
+
+    profiles.lauti = {
+      enable = true;
+      fqdn = "events.stura-ilmenau.de";
+    };
   };
 }

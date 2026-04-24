@@ -15,10 +15,9 @@
       fsType = "btrfs";
     };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/4409-BD9C";
-      fsType = "vfat";
-      options = [ "fmask=0022" "dmask=0022" ];
+  fileSystems."/var/lib/nextcloud" =
+    { device = "/dev/disk/by-uuid/639a3aac-dd93-4419-9112-cfd29847cdff";
+      fsType = "btrfs";
     };
 
   fileSystems."/var/lib/postgresql" =
@@ -26,8 +25,14 @@
       fsType = "btrfs";
     };
 
-  fileSystems."/var/lib/nextcloud" =
-    { device = "/dev/disk/by-uuid/639a3aac-dd93-4419-9112-cfd29847cdff";
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/4409-BD9C";
+      fsType = "vfat";
+      options = [ "fmask=0022" "dmask=0022" ];
+    };
+
+  fileSystems."/var/lib/lauti" =
+    { device = "/dev/disk/by-uuid/cfd8d5d2-e885-44eb-9a49-887a216b3a94";
       fsType = "btrfs";
     };
 

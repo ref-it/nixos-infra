@@ -4,10 +4,16 @@
   imports = [
     inputs.sops.nixosModules.sops
 
+    (inputs.nixpkgs-unstable + "/nixos/modules/services/web-apps/lauti.nix")
+
     ./base-options.nix
     ./users.nix
 
     ../profiles
+  ];
+
+  disabledModules = [
+    "services/web-apps/lauti.nix"
   ];
 
   config = {

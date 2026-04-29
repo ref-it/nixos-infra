@@ -82,9 +82,6 @@
             "/" = {
               proxyPass = "http://10.170.20.104:3000";
               recommendedProxySettings = true;
-              extraConfig = ''
-                proxy_set_header CLIENT_IP $remote_addr;
-              '';
             };
             "/ws" = {
               proxyPass = "http://10.170.20.104:6042";
@@ -92,7 +89,7 @@
               proxyWebsockets = true;
             };
             "/cable" = {
-              proxyPass = "http://10.170.20.104:6042";
+              proxyPass = "http://10.170.20.104:3000";
               recommendedProxySettings = true;
               proxyWebsockets = true;
             };

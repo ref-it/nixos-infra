@@ -57,6 +57,7 @@ in
         reverse-proxy-headers = "xforwarded";
         log-console-level = "debug";
         log-syslog-level = "debug";
+        features = "transient-users";
       };
     };
 

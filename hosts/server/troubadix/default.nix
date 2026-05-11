@@ -6,7 +6,7 @@
   ];
 
   config = {
-    system.stateVersion = "24.05";
+    system.stateVersion = "25.11";
 
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;

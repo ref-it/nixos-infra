@@ -31,5 +31,17 @@
       extraGroups = [ "wheel" ];
       openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDQD1kCdE0IWOt9Xg3J7PgkaDFQ1NWNRPM7dRy2R4sGm marc@schlagenhauf.net" ];
     };
+
+    malte = {
+      isNormalUser = true;
+      extraGroups = [ "wheel" ];
+      openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEegL8hoUE+rte/7PnivQ7DbgWLy8Pcg8srTcbxlfbke malte@think-top" ];
+    };
+
+    marco = {
+      isNormalUser = true;
+      extraGroups = [ "wheel" ];
+      openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB9wjlPCEdw5l3emedbuP7/9zqwC8CZHk2Tvs+pN5Ef/ marco@slycro" ];
+    };
   };
 }

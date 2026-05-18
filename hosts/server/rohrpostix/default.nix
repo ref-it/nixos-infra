@@ -75,6 +75,18 @@
             };
           };
         };
+        "ep.stura-ilmenau.de" = {
+          serverAliases = [
+            "ep.erstiwiki.de"
+          ];
+          enableACME = true;
+          forceSSL = true;
+          locations."/" = {
+            proxyPass = "https://10.170.20.113";
+            recommendedProxySettings = true;
+            proxyWebsockets = true;
+          };
+        };
         "help.stura-ilmenau.de" = {
           enableACME = true;
           forceSSL = true;
@@ -115,13 +127,6 @@
             "cal.stura-ilmenau.de"
           ];
           target = "http://10.170.20.121";
-        }
-        {
-          sources = [
-            "ep.stura-ilmenau.de"
-            "ep.erstiwiki.de"
-          ];
-          target = "https://10.170.20.113";
         }
         {
           sources = [

@@ -8,6 +8,7 @@ inputs:
       system = "x86_64-linux";
       overlays = [
         (final: prev: { inherit (import inputs.nixpkgs-unstable { system = prev.stdenv.hostPlatform.system; }) lauti; })
+        (final: prev: { inherit (import inputs.nixpkgs-unstable { system = prev.stdenv.hostPlatform.system; }) pnpm; })
         (final: prev: { inherit (import inputs.nixpkgs-unstable { system = prev.stdenv.hostPlatform.system; }) vaultwarden; })
       ];
     };
@@ -23,6 +24,7 @@ inputs:
   barometrix = ./hosts/server/barometrix;
   gelantine = ./hosts/server/gelantine;
   grautvornix = ./hosts/server/grautvornix;
+  griesgramix = ./hosts/server/griesgramix;
   gutemine = ./hosts/server/gutemine;
   idefix = ./hosts/server/idefix;
   majestix = ./hosts/server/majestix;

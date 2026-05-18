@@ -11,9 +11,9 @@
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
 
-    networking.hostName = "automatix";
+    networking.hostName = "griesgramix";
 
-    base.primaryIP = "2001:638:904:ffd0::19";
+    base.primaryIP = "2001:638:904:ffd0::18";
 
     systemd.network = {
       enable = true;
@@ -24,7 +24,7 @@
             IPv6AcceptRA = false;
           };
           address = [
-            "2001:638:904:ffd0::19/64"
+            "2001:638:904:ffd0::18/64"
           ];
           gateway = [
             "2001:638:904:ffd0::1"
@@ -36,7 +36,7 @@
             IPv6AcceptRA = false;
           };
           address = [
-            "10.170.20.114/24"
+            "10.170.20.113/24"
           ];
           gateway = [
             "10.170.20.1"
@@ -47,9 +47,9 @@
     
     sops.defaultSopsFile = ./secrets.yaml;
 
-    profiles.hedgedoc = {
+    profiles.etherpad = {
       enable = true;
-      fqdn = "hedgedoc.stura-ilmenau.de";
+      fqdn = "ep.stura-ilmenau.de";
     };
   };
 }

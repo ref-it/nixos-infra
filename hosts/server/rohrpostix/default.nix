@@ -122,6 +122,11 @@
             "ep.erstiwiki.de"
           ];
           target = "https://10.170.20.113";
+          websocket = {
+            enable = true;
+            target = "https://10.170.20.113";
+            locations = [ "/" ];
+          };
         }
         {
           sources = [

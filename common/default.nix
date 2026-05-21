@@ -49,7 +49,7 @@
     system.autoUpgrade = {
       enable = true;
       allowReboot = true;
-      flake = "github:Ref-IT/nixos-infra";
+      flake = "github:ref-it/nixos-infra";
       dates = "02:00";
     };
 
@@ -116,7 +116,7 @@
 
     security.acme = {
       acceptTerms = true;
-      defaults.email = "ref-it@tu-ilmenau.de";
+      defaults.email = "it@stura-ilmenau.de";
     };
   };
 }

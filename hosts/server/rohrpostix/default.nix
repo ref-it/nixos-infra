@@ -248,6 +248,12 @@
         }
         {
           sources = [
+            "kalender.stura.tu-ilmenau.de"
+          ];
+          target = "events.stura-ilmenau.de";
+        }
+        {
+          sources = [
             "protokoll.stura.tu-ilmenau.de"
           ];
           target = "protokoll.stura-ilmenau.de";

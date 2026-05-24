@@ -102,6 +102,7 @@ in
 
               olcDatabase = "{1}mdb";
               olcDbDirectory = "/var/lib/openldap/data";
+              olcDbMaxsize = "4294967296";
 
               olcSuffix = "dc=stura-ilmenau,dc=de";
 

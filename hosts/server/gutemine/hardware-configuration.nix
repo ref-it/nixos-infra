@@ -21,6 +21,11 @@
       options = [ "fmask=0022" "dmask=0022" ];
     };
 
+  fileSystems."/var/lib/openldap" =
+    { device = "/dev/disk/by-uuid/3d218da4-cce2-4b6f-85c4-0ee2f5e74786";
+      fsType = "ext4";
+    };
+
   swapDevices = [ ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

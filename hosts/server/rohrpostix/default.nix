@@ -142,18 +142,6 @@
         }
         {
           sources = [
-            "helfer.stura-ilmenau.de"
-            "helfer.erstiwoche.de"
-            "helfer.fsr-ia.de"
-          ];
-          target = "https://10.170.20.111";
-          extraConfig = ''
-            proxy_set_header X-Forwarded-For $remote_addr;
-            proxy_set_header X-Forwarded-Proto $scheme;
-          '';
-        }
-        {
-          sources = [
             "matrix.stura.eu"
           ];
           unrestrictedLocations = [ "~ ^(/_matrix|/_synapse/client|/_synapse/admin)" ];

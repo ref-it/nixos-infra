@@ -242,6 +242,12 @@
         }
         {
           sources = [
+            "ordnungen.stura.eu"
+          ];
+          target = "ordnungen.stura-ilmenau.de";
+        }
+        {
+          sources = [
             "protokoll.stura.tu-ilmenau.de"
           ];
           target = "protokoll.stura-ilmenau.de";

@@ -76,6 +76,7 @@
       fqdn = "office.stura-ilmenau.de";
       trustedHosts = [
         "cloud.stura-ilmenau.de"
+        "wolke7.stura-ilmenau.de"
         "2001:638:904:ffd0::12"
       ];
     };

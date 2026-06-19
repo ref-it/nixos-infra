@@ -6,7 +6,7 @@
   ];
 
   config = {
-    system.stateVersion = "23.05";
+    system.stateVersion = "26.05";
 
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
@@ -46,7 +46,7 @@
 
     profiles.nextcloud-calendar = {
       enable = true;
-      fqdn = "cal.stura-ilmenau.de";
+      fqdn = "wolke7.stura-ilmenau.de";
       trustedProxies = [
         "10.170.20.105"
       ];
@@ -54,7 +54,7 @@
 
     profiles.lauti = {
       enable = true;
-      fqdn = "events.stura-ilmenau.de";
+      fqdn = "calendar.stura-ilmenau.de";
     };
   };
 }

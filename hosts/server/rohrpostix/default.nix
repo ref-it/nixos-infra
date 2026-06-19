@@ -124,13 +124,8 @@
       httpProxy = [
         {
           sources = [
-            "cal.stura-ilmenau.de"
-          ];
-          target = "http://10.170.20.121";
-        }
-        {
-          sources = [
-            "events.stura-ilmenau.de"
+            "calendar.stura-ilmenau.de"
+            "wolke7.stura-ilmenau.de"
           ];
           target = "http://10.170.20.121";
         }
@@ -155,14 +150,7 @@
         }
         {
           sources = [
-            "tickets.stura-ilmenau.de"
-            "tickets.erstiwoche.de"
-            "tickets.fsr-ei.de"
-            "tickets.fsr-ia.de"
-            "tickets.fsr-mb.de"
-            "tickets.fsr-mn.de"
-            "tickets.fsr-wm.de"
-            "tickets.studierendenbeirat.de"
+            "events.stura-ilmenau.de"
           ];
           target = "http://10.170.20.112";
         }
@@ -192,6 +180,12 @@
             "cloud.stura.tu-ilmenau.de"
           ];
           target = "cloud.stura-ilmenau.de";
+        }
+        {
+          sources = [
+            "cloud9.stura-ilmenau.de"
+          ];
+          target = "wolke7.stura-ilmenau.de";
         }
         {
           sources = [
@@ -238,7 +232,7 @@
           sources = [
             "kalender.stura.tu-ilmenau.de"
           ];
-          target = "events.stura-ilmenau.de";
+          target = "calendar.stura-ilmenau.de";
         }
         {
           sources = [

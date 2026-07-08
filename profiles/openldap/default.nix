@@ -131,6 +131,13 @@ in
                 olcOverlay = "{0}dynlist";
                 olcDlAttrSet = "groupOfURLs memberURL uniqueMember+memberOf@groupOfUniqueNames";
               };
+              "olcOverlay={1}sssvlv".attrs = {
+                objectClass = [
+                  "olcSSSVLVConfig"
+                  "olcOverlayConfig"
+                ];
+                olcOverlay = "{1}sssvlv";
+              };
             };
           };
 

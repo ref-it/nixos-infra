@@ -76,7 +76,6 @@ in
             "${pkgs.openldap}/etc/schema/namedobject.ldif"
             "${pkgs.openldap}/etc/schema/inetorgperson.ldif"
             "${pkgs.openldap}/etc/schema/dyngroup.ldif"
-            "${pkgs.openldap}/etc/schema/ppolicy.ldif"
           ];
 
           "cn=module{0}" = {

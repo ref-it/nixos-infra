@@ -23,17 +23,14 @@ in
       extraInputRules = ''
         ip saddr 10.170.20.104 tcp dport { 389, 636 } accept comment "miraculix"
         ip saddr 10.170.20.106 tcp dport { 389, 636 } accept comment "majestix"
-        ip saddr 10.170.20.110 tcp dport { 389, 636 } accept comment "hephaistos"
         ip saddr 10.170.20.117 tcp dport { 389, 636 } accept comment "gelantine"
         ip6 saddr 2001:638:904:ffbe::190 tcp dport { 389, 636 } accept comment "web-2"
         ip6 saddr 2001:638:904:ffbe::191 tcp dport { 389, 636 } accept comment "web-2"
         ip6 saddr 2001:638:904:ffbe::192 tcp dport { 389, 636 } accept comment "web-2"
         ip6 saddr 2001:638:904:ffbe::193 tcp dport { 389, 636 } accept comment "web-2"
         ip6 saddr 2001:638:904:ffbf::54 tcp dport { 389, 636 } accept comment "web-2-manage"
-        ip6 saddr 2001:638:904:ffd0::d tcp dport { 389, 636 } accept comment "klotho"
         ip6 saddr 2001:638:904:ffd0::12 tcp dport { 389, 636 } accept comment "obelix"
         ip6 saddr 2001:638:904:ffd0::13 tcp dport { 389, 636 } accept comment "majestix"
-        ip6 saddr 2001:638:904:ffd0::14 tcp dport { 389, 636 } accept comment "hephaistos"
         ip6 saddr 2001:638:904:ffd0::15 tcp dport { 389, 636 } accept comment "miraculix"
       '';
     };
@@ -59,16 +56,16 @@ in
 
       settings = {
         attrs = {
-          olcLogLevel = "conns config";
+          olcLogLevel = "stats";
 
           /* settings for acme ssl */
           olcTLSCACertificateFile = "/var/lib/acme/${cfg.fqdn}/full.pem";
           olcTLSCertificateFile = "/var/lib/acme/${cfg.fqdn}/cert.pem";
           olcTLSCertificateKeyFile = "/var/lib/acme/${cfg.fqdn}/key.pem";
-          olcTLSCipherSuite = "HIGH:MEDIUM:+3DES:+RC4:+aNULL";
+          olcTLSCipherSuite = "HIGH:!aNULL:!eNULL:!3DES:!RC4:!MD5:!EXPORT";
           olcTLSCRLCheck = "none";
           olcTLSVerifyClient = "never";
-          olcTLSProtocolMin = "3.1";
+          olcTLSProtocolMin = "3.3";
         };
 
         children = {
@@ -79,6 +76,7 @@ in
             "${pkgs.openldap}/etc/schema/namedobject.ldif"
             "${pkgs.openldap}/etc/schema/inetorgperson.ldif"
             "${pkgs.openldap}/etc/schema/dyngroup.ldif"
+            "${pkgs.openldap}/etc/schema/ppolicy.ldif"
           ];
 
           "cn=module{0}" = {
@@ -110,15 +108,17 @@ in
               olcRootPW.path = config.sops.secrets."openldap-pw".path;
 
               olcAccess = [
-                /* custom access rules for userPassword attributes */
                 ''{0}to attrs=userPassword
-                    by self write
-                    by anonymous auth
-                    by * none''
+                  by self write
+                  by anonymous auth
+                  by * none''
 
-                /* allow read on anything else */
-                ''{1}to *
-                    by * read''
+                ''{1}to attrs=pwdFailureTime,pwdAccountLockedTime,pwdChangedTime,pwdReset,pwdHistory
+                  by self read
+                  by * none''
+
+                ''{2}to *
+                  by users read''
               ];
             };
           
@@ -137,6 +137,16 @@ in
                   "olcOverlayConfig"
                 ];
                 olcOverlay = "{1}sssvlv";
+              };
+              "olcOverlay={2}ppolicy".attrs = {
+                objectClass = [
+                  "olcOverlayConfig"
+                  "olcPPolicyConfig"
+                ];
+                olcOverlay = "{2}ppolicy";
+                olcPPolicyDefault = "cn=default,ou=policies,dc=stura-ilmenau,dc=de";
+                olcPPolicyHashCleartext = "TRUE";
+                olcPPolicyForwardUpdates = "FALSE";
               };
             };
           };

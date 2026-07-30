@@ -106,13 +106,16 @@ in
               olcRootDN = "cn=admin,dc=stura-ilmenau,dc=de";
               olcRootPW.path = config.sops.secrets."openldap-pw".path;
 
+              olcLastBind = "TRUE";
+              olcLastBindPrecision = "60";
+
               olcAccess = [
                 ''{0}to attrs=userPassword
                   by self write
                   by anonymous auth
                   by * none''
 
-                ''{1}to attrs=pwdFailureTime,pwdAccountLockedTime,pwdChangedTime,pwdReset,pwdHistory
+                ''{1}to attrs=pwdFailureTime,pwdAccountLockedTime,pwdChangedTime,pwdReset,pwdHistory,pwdLastSuccess
                   by self read
                   by * none''
 

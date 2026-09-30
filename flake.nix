@@ -22,7 +22,7 @@
     devShells.default = pkgs.mkShell {
       name = "stura-nixfiles-shell";
       buildInputs = [
-        sops.nixosModules.sops
+        pkgs.sops
         colmena.packages.${system}.colmena
         pkgs.ssh-to-age
       ];

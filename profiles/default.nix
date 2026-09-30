@@ -11,6 +11,7 @@
     ./matrix
     ./nextcloud
     ./nextcloud-calendar
+    ./nextcloud-talk-hpb
     ./opencloud-kiste
     ./openldap
     ./pretix

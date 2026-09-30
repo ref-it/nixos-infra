@@ -23,7 +23,7 @@
       name = "stura-nixfiles-shell";
       buildInputs = [
         sops.nixosModules.sops
-        colmena.defaultPackage.${system}
+        colmena.packages.${system}.colmena
         pkgs.ssh-to-age
       ];
     };

@@ -97,7 +97,7 @@ in
       };
       extraAppsEnable = true;
       extraApps = with config.services.nextcloud.package.packages.apps; {
-        inherit calendar contacts deck forms groupfolders notify_push polls richdocuments tasks user_oidc;
+        inherit calendar contacts deck forms groupfolders notify_push polls richdocuments spreed tasks user_oidc;
       };
     };
 

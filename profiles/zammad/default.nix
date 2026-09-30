@@ -84,6 +84,21 @@ in
           User = "zammad";
         };
       };
+      "zammad-conf-make-marc-admin" = {
+        wantedBy = [ "zammad-web.service" ];
+        after = [ "zammad-web.service" ];
+        environment = {
+          RAILS_ENV = "production";
+          RAILS_LOG_TO_STDOUT = "true";
+        };
+        serviceConfig = {
+          Type = "oneshot";
+          WorkingDirectory = "${pkgs.zammad}";
+          ExecStart = ''${pkgs.zammad}/bin/rails r "User.find_by(email: 'marc.schlagenhauf@tu-ilmenau.de').roles = Role.where(name: ['Admin', 'Agent'])"'';
+          Group = "zammad";
+          User = "zammad";
+        };
+      };
     };
 
     services.zammad = {

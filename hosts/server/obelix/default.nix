@@ -70,7 +70,14 @@
       enable = true;
       fqdn = "cloud.stura-ilmenau.de";
     };
-    
+
+    profiles.nextcloud-talk-hpb = {
+      enable = true;
+      fqdn = "cloud.stura-ilmenau.de";
+      turnFqdn = "cloud.stura-ilmenau.de";
+      nextcloudUrl = "https://cloud.stura-ilmenau.de";
+    };
+
     profiles.collabora = {
       enable = true;
       fqdn = "office.stura-ilmenau.de";

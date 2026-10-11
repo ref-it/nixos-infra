@@ -47,13 +47,13 @@ in
       serviceConfig = {
         Type = "simple";
         WorkingDirectory = "/var/lib/etherpad-lite";
-        ExecStart = "${pkgs.pnpm}/bin/pnpm run prod";
+        ExecStart = "${pkgs.pnpm_12}/bin/pnpm run prod";
         Restart = "always";
         User = "etherpad";
         Group = "etherpad";
         Environment = [
           "NODE_ENV=production"
-          "PATH=${pkgs.nodejs_24}/bin:${pkgs.pnpm}/bin:/run/current-system/sw/bin"
+          "PATH=${pkgs.nodejs_24}/bin:${pkgs.pnpm_12}/bin:/run/current-system/sw/bin"
         ];
       };
       after = [ "syslog.target" "network.target" ];

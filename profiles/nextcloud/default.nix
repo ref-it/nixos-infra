@@ -31,6 +31,16 @@ in
         Trusted proxies for the Nextcloud.
       '';
     };
+
+    memoryGB = mkOption {
+      type = types.ints.positive;
+      default = 8;
+      description = mdDoc ''
+        Amount of RAM in GiB available to the host. Used to size the
+        PostgreSQL memory settings; set this to the actual memory of the
+        machine, otherwise PostgreSQL stays at its defaults.
+      '';
+    };
   };
 
   config = mkIf cfg.enable {
@@ -97,8 +107,17 @@ in
       };
       extraAppsEnable = true;
       extraApps = with config.services.nextcloud.package.packages.apps; {
-        inherit calendar contacts deck forms groupfolders notify_push polls richdocuments spreed tasks user_oidc;
+        inherit calendar contacts deck forms groupfolders notify_push polls richdocuments spreed tables tasks user_oidc;
       };
+    };
+
+    services.postgresql.settings = {
+      shared_buffers = "${toString (cfg.memoryGB * 256)}MB";
+      effective_cache_size = "${toString (cfg.memoryGB * 768)}MB";
+      maintenance_work_mem = "${toString (min 2048 (cfg.memoryGB * 64))}MB";
+      work_mem = "16MB";
+      random_page_cost = "1.1";
+      effective_io_concurrency = 200;
     };
 
     services.postgresqlBackup = {

@@ -8,6 +8,7 @@ inputs:
       system = "x86_64-linux";
       overlays = [
         (final: prev: { inherit (import inputs.nixpkgs-unstable { system = prev.stdenv.hostPlatform.system; }) lauti; })
+        (final: prev: { inherit (import inputs.nixpkgs-unstable { system = prev.stdenv.hostPlatform.system; }) zammad; })
       ];
     };
 
@@ -19,7 +20,6 @@ inputs:
   # Hosts (Server)
   # asterix = ./hosts/server/asterix;
   automatix = ./hosts/server/automatix;
-  barometrix = ./hosts/server/barometrix;
   gelantine = ./hosts/server/gelantine;
   grautvornix = ./hosts/server/grautvornix;
   griesgramix = ./hosts/server/griesgramix;

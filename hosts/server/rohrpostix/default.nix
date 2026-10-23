@@ -125,7 +125,6 @@
         {
           sources = [
             "calendar.stura-ilmenau.de"
-            "wolke7.stura-ilmenau.de"
           ];
           target = "http://10.170.20.121";
         }
@@ -178,14 +177,10 @@
           sources = [
             "cloud.stura.eu"
             "cloud.stura.tu-ilmenau.de"
+            "cloud9.stura-ilmenau.de"
+            "wolke7.stura-ilmenau.de"
           ];
           target = "cloud.stura-ilmenau.de";
-        }
-        {
-          sources = [
-            "cloud9.stura-ilmenau.de"
-          ];
-          target = "wolke7.stura-ilmenau.de";
         }
         {
           sources = [

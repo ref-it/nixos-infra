@@ -143,12 +143,6 @@
         }
         {
           sources = [
-            "projects.stura-ilmenau.de"
-          ];
-          target = "http://10.170.20.110";
-        }
-        {
-          sources = [
             "events.stura-ilmenau.de"
           ];
           target = "http://10.170.20.112";
@@ -188,6 +182,13 @@
             "www.fachschaftsrat-ei.de"
           ];
           target = "fsr-ei.de";
+        }
+        {
+          sources = [
+            "fachschaftsrat-ia.de"
+            "www.fachschaftsrat-ia.de"
+          ];
+          target = "fsr-ia.de";
         }
         {
           sources = [

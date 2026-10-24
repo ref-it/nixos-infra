@@ -112,6 +112,19 @@
           forceSSL = true;
           locations."/".root = pkgs.synapse-admin;
         };
+        "stura.eu" = {
+          serverAliases = [
+            "www.stura.eu"
+            "stura.rocks"
+            "www.stura.rocks"
+          ];
+          enableACME = true;
+          forceSSL = true;
+          locations = {
+            "= /".return = "301 https://hub.stura-ilmenau.de/p/1";
+            "/".return = "301 https://www.stura-ilmenau.de$request_uri";
+          };
+        };
       };
     };
 
@@ -251,6 +264,9 @@
         {
           sources = [
             "stubra.de"
+            "www.stubra.de"
+            "studentenbeirat.de"
+            "www.studentenbeirat.de"
           ];
           target = "www.studierendenbeirat.de";
         }

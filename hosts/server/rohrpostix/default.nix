@@ -232,6 +232,12 @@
         }
         {
           sources = [
+            "kurz.erstiwoche.de"
+          ];
+          target = "www.erstiwoche.de";
+        }
+        {
+          sources = [
             "ordnungen.stura.eu"
           ];
           target = "ordnungen.stura-ilmenau.de";
@@ -241,6 +247,12 @@
             "protokoll.stura.tu-ilmenau.de"
           ];
           target = "protokoll.stura-ilmenau.de";
+        }
+        {
+          sources = [
+            "stubra.de"
+          ];
+          target = "www.studierendenbeirat.de";
         }
         {
           sources = [

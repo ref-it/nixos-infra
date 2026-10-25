@@ -67,6 +67,7 @@ in
     services.nextcloud = {
       enable = true;
       package = pkgs.nextcloud35;
+      phpPackage = pkgs.php85;
       https = true;
       hostName = cfg.fqdn;
       autoUpdateApps.enable = true;
@@ -112,7 +113,7 @@ in
     };
 
     services.postgresql.settings = {
-      shared_buffers = "${toString (cfg.memoryGB * 256)}MB";
+      shared_buffers = "256MB";
       effective_cache_size = "${toString (cfg.memoryGB * 768)}MB";
       maintenance_work_mem = "${toString (min 2048 (cfg.memoryGB * 64))}MB";
       work_mem = "16MB";

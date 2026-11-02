@@ -44,14 +44,6 @@
 
     sops.defaultSopsFile = ./secrets.yaml;
 
-    profiles.nextcloud-calendar = {
-      enable = true;
-      fqdn = "wolke7.stura-ilmenau.de";
-      trustedProxies = [
-        "10.170.20.105"
-      ];
-    };
-
     profiles.lauti = {
       enable = true;
       fqdn = "calendar.stura-ilmenau.de";

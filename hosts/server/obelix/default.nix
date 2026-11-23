@@ -8,6 +8,8 @@
   config = {
     system.stateVersion = "23.05";
 
+    services.postgresql.package = pkgs.postgresql_18;
+
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
 

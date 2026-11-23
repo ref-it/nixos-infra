@@ -13,7 +13,12 @@
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
 
-    networking.hostName = "miraculix";
+    networking = {
+      hostName = "miraculix";
+      extraHosts = ''
+        10.170.20.118 ldap.stura-ilmenau.de
+      '';
+    };
 
     base.primaryIP = "2001:638:904:ffd0::15";
 
@@ -46,10 +51,6 @@
         };
       };
     };
-
-    networking.extraHosts = ''
-      2001:638:904:ffd0::24 ldap.stura-ilmenau.de
-    '';
 
     sops.defaultSopsFile = ./secrets.yaml;
 

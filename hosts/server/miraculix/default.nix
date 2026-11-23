@@ -8,6 +8,8 @@
   config = {
     system.stateVersion = "23.05";
 
+    services.postgresql.package = pkgs.postgresql_18;
+
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
 
@@ -54,6 +56,7 @@
     profiles.zammad = {
       enable = true;
       bindHost = "0.0.0.0";
+      elasticsearch.enable = true;
     };
 
     services.nginx = {

@@ -1,0 +1,8 @@
+{
+  "imageName": "docker.io/library/elasticsearch",
+  "imageDigest": "sha256:6f11b295d5099c18b8774d280a82725d1184d0d5cb08373b12785ce7cd7a9bfb",
+  "hash": "sha256-3p3w0OsAR4sZk3oYJqM233oAXNEKKUKEW3LIbwwc4Jc=",
+  "finalImageName": "docker.io/library/elasticsearch",
+  "finalImageTag": "9.5.5",
+  "tagPattern": "^9\\.[0-9]+\\.[0-9]+$"
+}

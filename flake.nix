@@ -25,6 +25,10 @@
         pkgs.sops
         colmena.packages.${system}.colmena
         pkgs.ssh-to-age
+        # update-oci-images.sh
+        pkgs.jq
+        pkgs.skopeo
+        pkgs.nix-prefetch-docker
       ];
     };
   });

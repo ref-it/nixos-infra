@@ -8,21 +8,8 @@ let
   port = 9980;
   upstream = "http://[::1]:${toString port}";
 
-  # Official Collabora CODE image, pinned by digest so the running version is
-  # always what's committed here. To update:
-  #   nix run nixpkgs#nix-prefetch-docker -- --image-name collabora/code \
-  #     --image-tag <tag> --arch amd64 --os linux
-  # and copy the tag, imageDigest and hash below.
-  # Tags: https://hub.docker.com/r/collabora/code/tags
-  imageName = "collabora/code";
-  imageTag = "26.04.6.2.1";
-  image = pkgs.dockerTools.pullImage {
-    inherit imageName;
-    imageDigest = "sha256:a2f5d4e88addd46033d8440f7a13b82f7e6fe444bf8c6b5a3eadc789f0b5342b";
-    hash = "sha256-wVXvl2cR+RjBHcYSWG8BlvCcLYbzoy0Vi5CTv0dsrZU=";
-    finalImageName = imageName;
-    finalImageTag = imageTag;
-  };
+  # Official Collabora CODE image, pinned in oci-images/collabora.json.
+  ociImages = import ../../oci-images { inherit lib pkgs; };
 
   # WOPI hosts allowed to open documents, one alias group per host.
   hostUrl = h: if hasInfix ":" h then "https://[${h}]:443" else "https://${h}:443";
@@ -64,8 +51,7 @@ in
     networking.firewall.allowedTCPPorts = [ 80 443 ];
 
     virtualisation.oci-containers.containers.collabora = {
-      image = "${imageName}:${imageTag}";
-      imageFile = image;
+      inherit (ociImages.collabora) image imageFile;
       environment = aliasGroups // {
         server_name = cfg.fqdn;
         DONT_GEN_SSL_CERT = "1";

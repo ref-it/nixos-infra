@@ -13,7 +13,12 @@
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
 
-    networking.hostName = "obelix";
+    networking= {
+      hostName = "obelix";
+      extraHosts = ''
+        10.170.20.118 ldap.stura-ilmenau.de
+      '';
+    };
 
     base.primaryIP = "2001:638:904:ffd0::12";
 

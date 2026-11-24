@@ -50,6 +50,11 @@
     profiles.openldap = {
       enable = true;
       fqdn = "ldap.stura-ilmenau.de";
+      realms.stura.services = {
+        nextcloud = {};
+        zammad = {};
+        stumv.access = "write";
+      };
     };
   };
 }

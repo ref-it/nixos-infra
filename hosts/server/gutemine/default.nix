@@ -51,10 +51,14 @@
       enable = true;
       fqdn = "ldap.stura-ilmenau.de";
       realms.stura.services = {
+        limesurvey = {};
         nextcloud = {};
         zammad = {};
       };
-      globalServices.stumv.access = "write";
+      globalServices = {
+        stumv.access = "write";
+        phpldapadmin.access = "write";
+      };
     };
   };
 }

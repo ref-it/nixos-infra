@@ -21,6 +21,13 @@ in
     networking.firewall.allowedTCPPorts = [ 80 443 ];
 
     sops.secrets = {
+      # Env file for the service, kept as one multi-line value in secrets.yaml.
+      "hedgedoc-env" = {
+        owner = "root";
+        group = "root";
+        mode = "0400";
+        restartUnits = [ "hedgedoc.service" ];
+      };
       "borg-passphrase" = {
         owner = "root";
         group = "root";
@@ -65,8 +72,14 @@ in
           allowOrigin = [
             "${cfg.fqdn}"
           ];
+          allowAnonymous = false;
+          allowAnonymousEdits = false;
+          defaultPermission = "limited";
+          requireFreeURLAuthentication = true;
+          # Otherwise anyone could become a "logged-in user" by signing up.
+          allowEmailRegister = false;
         };
-        environmentFile = "/var/lib/hedgedoc/hedgedoc.env";
+        environmentFile = config.sops.secrets."hedgedoc-env".path;
       };
 
       nginx = {

@@ -30,8 +30,9 @@ let
     mapAttrsToList (realm: realmCfg: { dir = realm; dn = servicesDn realm; services = realmCfg.services; }) cfg.realms
     ++ [ { dir = "global"; dn = globalServicesDn; services = cfg.globalServices; } ];
 
-  dnsWith = access: scopeDn: services:
-    map (name: "cn=${name},${scopeDn}") (attrNames (filterAttrs (_: svc: svc.access == access) services));
+  dnsWhere = pred: scopeDn: services:
+    map (name: "cn=${name},${scopeDn}") (attrNames (filterAttrs (_: pred) services));
+  dnsWith = access: dnsWhere (svc: svc.access == access);
   realmServices = access: realm: dnsWith access (servicesDn realm) cfg.realms.${realm}.services;
   globalServices = access: dnsWith access globalServicesDn cfg.globalServices;
 
@@ -48,14 +49,24 @@ let
   # Password attributes of people: write services may set passwords (=w:
   # without reading the hashes) and unlock accounts. Placed before the
   # generic password rules, which apply to everyone else.
-  passwordAcls = scopeDn: writers: optionals (writers != []) [
-    ''to dn.subtree="${scopeDn}" attrs=userPassword${by "=w" writers}
+  passwordAcls = scopeDn: servicesBase: services:
+    let
+      writers = dnsWith "write" servicesBase services;
+      hashes = svc: svc.readPasswordHashes;
+      writeHashes = dnsWhere (svc: svc.access == "write" && hashes svc) servicesBase services;
+      writeOnly = dnsWhere (svc: svc.access == "write" && !hashes svc) servicesBase services;
+      readHashes = dnsWhere (svc: svc.access == "read" && hashes svc) servicesBase services;
+    in
+      optional (writers ++ readHashes != [])
+        ''to dn.subtree="${scopeDn}" attrs=userPassword${by "write" writeHashes}${by "=w" writeOnly}${by "read" readHashes}
       by * break''
-    ''to dn.subtree="${scopeDn}" attrs=pwdFailureTime,pwdAccountLockedTime,pwdReset${by "write" writers}
-      by * break''
-  ];
-  writerPasswordAcls = passwordAcls communitiesDn (globalServices "write")
-    ++ concatMap (realm: passwordAcls (realmDn realm) (realmServices "write" realm)) (attrNames cfg.realms);
+      ++ optional (writers != [])
+        # All password policy state, incl. pwdLastSuccess (StuMV detects inactive
+        # accounts by it). Operational ones like pwdLastSuccess stay read-only.
+        ''to dn.subtree="${scopeDn}" attrs=pwdFailureTime,pwdAccountLockedTime,pwdChangedTime,pwdReset,pwdHistory,pwdLastSuccess${by "write" writers}
+      by * break'';
+  writerPasswordAcls = passwordAcls communitiesDn globalServicesDn cfg.globalServices
+    ++ concatMap (realm: passwordAcls (realmDn realm) (servicesDn realm) cfg.realms.${realm}.services) (attrNames cfg.realms);
 
   # Global services: their access to all realms, before the per-realm rules.
   globalAcls = optional (globalServices "write" ++ globalServices "read" != [])
@@ -175,6 +186,14 @@ in
                 e.g. for member management.
               '';
             };
+            options.readPasswordHashes = mkOption {
+              type = types.bool;
+              default = false;
+              description = mdDoc ''
+                Allow reading `userPassword` (the hashes). Only for services that
+                need them, e.g. StuMV mirrors them into its own database.
+              '';
+            };
           });
           default = {};
           description = mdDoc ''
@@ -198,6 +217,14 @@ in
           type = types.enum [ "read" "write" ];
           default = "read";
           description = mdDoc "Like a realm service's `access`, but for all realms.";
+        };
+        options.readPasswordHashes = mkOption {
+          type = types.bool;
+          default = false;
+          description = mdDoc ''
+            Allow reading `userPassword` (the hashes). Only for services that
+            need them, e.g. StuMV mirrors them into its own database.
+          '';
         };
       });
       default = {};
@@ -237,6 +264,7 @@ in
         owner = "openldap";
         group = "openldap";
         mode = "0400";
+        restartUnits = [ "openldap.service" ];
       };
       "borg-passphrase" = {
         owner = "root";

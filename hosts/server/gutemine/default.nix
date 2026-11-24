@@ -56,7 +56,10 @@
         zammad = {};
       };
       globalServices = {
-        stumv.access = "write";
+        stumv = {
+          access = "write";
+          readPasswordHashes = true;
+        };
         phpldapadmin.access = "write";
       };
     };

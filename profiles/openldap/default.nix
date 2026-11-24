@@ -15,43 +15,59 @@ let
   # service accounts. Not reachable over the network.
   rootPeercred = "gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth";
 
-  # Any service account of any realm. ACL regexes match the normalized
-  # (lowercase) DN.
-  anyServiceRegex = "^cn=[^,]+,ou=services,ou=[^,]+,ou=communities,${suffix}$";
+  communitiesDn = "ou=Communities,${suffix}";
+  globalServicesDn = "ou=Services,${suffix}";
+
+  # Any service account, of a realm or global. ACL regexes match the
+  # normalized (lowercase) DN.
+  anyServiceRegex = "^cn=[^,]+,ou=services,(ou=[^,]+,ou=communities,)?${suffix}$";
 
   credentialsDir = "/var/lib/openldap-service-credentials";
 
-  serviceNames = realm: attrNames cfg.realms.${realm}.services;
-  servicesWith = access: realm:
-    filter (name: cfg.realms.${realm}.services.${name}.access == access) (serviceNames realm);
-  byServices = access: realm: level:
-    concatMapStrings (name: "\n      by dn.exact=\"${serviceDn realm name}\" ${level}") (servicesWith access realm);
+  # Where service accounts live: each realm's ou=Services, plus the global one
+  # for services working on all realms. `dir` is the credentials subdirectory.
+  scopes =
+    mapAttrsToList (realm: realmCfg: { dir = realm; dn = servicesDn realm; services = realmCfg.services; }) cfg.realms
+    ++ [ { dir = "global"; dn = globalServicesDn; services = cfg.globalServices; } ];
 
-  # Password attributes of a realm's people: write services may set
-  # passwords (=w: without reading the hashes) and unlock accounts. Placed
-  # before the generic password rules, which apply to everyone else.
-  realmPasswordAcls = concatMap (realm: optionals (servicesWith "write" realm != []) [
-    ''to dn.subtree="${realmDn realm}" attrs=userPassword${byServices "write" realm "=w"}
-      by * break''
-    ''to dn.subtree="${realmDn realm}" attrs=pwdFailureTime,pwdAccountLockedTime,pwdReset${byServices "write" realm "write"}
-      by * break''
-  ]) (attrNames cfg.realms);
+  dnsWith = access: scopeDn: services:
+    map (name: "cn=${name},${scopeDn}") (attrNames (filterAttrs (_: svc: svc.access == access) services));
+  realmServices = access: realm: dnsWith access (servicesDn realm) cfg.realms.${realm}.services;
+  globalServices = access: dnsWith access globalServicesDn cfg.globalServices;
 
-  # Service entries: bind only, invisible to everyone (themselves included,
-  # passwords are managed by openldap-service-accounts). First rule after
-  # root, so no realm rule (e.g. a write service's password access) applies
-  # to service accounts.
-  serviceEntryAcls = map (realm:
-    ''to dn.subtree="${servicesDn realm}"
+  by = level: concatMapStrings (dn: "\n      by dn.exact=\"${dn}\" ${level}");
+
+  # Service entries (global and of every realm): bind only, invisible and
+  # unmodifiable for everyone (themselves included, passwords are managed by
+  # openldap-service-accounts). First rule after root, so no other rule (e.g.
+  # a write service's access) applies to them.
+  serviceEntryAcl = ''to dn.regex="^(.+,)?ou=services,(ou=[^,]+,ou=communities,)?${suffix}$"
       by anonymous auth
-      by * none''
-  ) (attrNames cfg.realms);
+      by * none'';
 
-  realmAcls = concatMap (realm: [
-    ''to dn.subtree="${realmDn realm}"${byServices "write" realm "write"}${byServices "read" realm "read"}
+  # Password attributes of people: write services may set passwords (=w:
+  # without reading the hashes) and unlock accounts. Placed before the
+  # generic password rules, which apply to everyone else.
+  passwordAcls = scopeDn: writers: optionals (writers != []) [
+    ''to dn.subtree="${scopeDn}" attrs=userPassword${by "=w" writers}
+      by * break''
+    ''to dn.subtree="${scopeDn}" attrs=pwdFailureTime,pwdAccountLockedTime,pwdReset${by "write" writers}
+      by * break''
+  ];
+  writerPasswordAcls = passwordAcls communitiesDn (globalServices "write")
+    ++ concatMap (realm: passwordAcls (realmDn realm) (realmServices "write" realm)) (attrNames cfg.realms);
+
+  # Global services: their access to all realms, before the per-realm rules.
+  globalAcls = optional (globalServices "write" ++ globalServices "read" != [])
+    ''to dn.subtree="${communitiesDn}"${by "write" (globalServices "write")}${by "read" (globalServices "read")}
+      by * break'';
+
+  # A realm's own services read (or write) it, other services get nothing.
+  realmAcls = map (realm:
+    ''to dn.subtree="${realmDn realm}"${by "write" (realmServices "write" realm)}${by "read" (realmServices "read" realm)}
       by dn.regex="${anyServiceRegex}" none
       by users read''
-  ]) (attrNames cfg.realms);
+  ) (attrNames cfg.realms);
 
   # olcAccess needs "{n}" prefixes to keep the order.
   numbered = imap0 (i: acl: "{${toString i}}${acl}");
@@ -78,18 +94,20 @@ let
 
     install -d -m 0700 ${credentialsDir}
 
-    ${concatStrings (mapAttrsToList (realm: realmCfg: ''
-      install -d -m 0700 ${credentialsDir}/${realm}
-      if ! exists "${servicesDn realm}"; then
-        echo "creating ${servicesDn realm}"
-        ldapadd "''${LDAP[@]}" <<EOF
-    dn: ${servicesDn realm}
+    ${concatMapStrings (scope: let names = attrNames scope.services; in ''
+      install -d -m 0700 ${credentialsDir}/${scope.dir}
+      ${optionalString (names != []) ''
+        if ! exists "${scope.dn}"; then
+          echo "creating ${scope.dn}"
+          ldapadd "''${LDAP[@]}" <<EOF
+    dn: ${scope.dn}
     objectClass: organizationalUnit
     ou: Services
     EOF
-      fi
+        fi
+      ''}
 
-      ${concatMapStrings (name: let dn = serviceDn realm name; pwFile = "${credentialsDir}/${realm}/${name}"; in ''
+      ${concatMapStrings (name: let dn = "cn=${name},${scope.dn}"; pwFile = "${credentialsDir}/${scope.dir}/${name}"; in ''
         if [ ! -s ${pwFile} ]; then
           # No trailing newline: `ldapwhoami -y` would treat it as part of the password.
           (umask 077; openssl rand -hex 24 | tr -d '\n' > ${pwFile})
@@ -114,20 +132,22 @@ let
     userPassword: $(cat ${pwFile})
     EOF
         fi
-      '') (attrNames realmCfg.services)}
+      '') names}
 
-      ldapsearch "''${LDAP[@]}" -LLL -o ldif-wrap=no -s one -b "${servicesDn realm}" "(objectClass=applicationProcess)" cn \
-        | sed -n 's/^cn: //p' | while read -r name; do
-          case " ${concatStringsSep " " (attrNames realmCfg.services)} " in
-            *" $name "*) ;;
-            *)
-              echo "removing cn=$name,${servicesDn realm}"
-              ldapdelete "''${LDAP[@]}" "cn=$name,${servicesDn realm}"
-              rm -f "${credentialsDir}/${realm}/$name"
-              ;;
-          esac
-        done
-    '') cfg.realms)}
+      if exists "${scope.dn}"; then
+        ldapsearch "''${LDAP[@]}" -LLL -o ldif-wrap=no -s one -b "${scope.dn}" "(objectClass=applicationProcess)" cn \
+          | sed -n 's/^cn: //p' | while read -r name; do
+            case " ${concatStringsSep " " names} " in
+              *" $name "*) ;;
+              *)
+                echo "removing cn=$name,${scope.dn}"
+                ldapdelete "''${LDAP[@]}" "cn=$name,${scope.dn}"
+                rm -f "${credentialsDir}/${scope.dir}/$name"
+                ;;
+            esac
+          done
+      fi
+    '') scopes}
   '';
 in
 {
@@ -171,13 +191,33 @@ in
       example = literalExpression ''{ stura.services = { zammad = {}; members.access = "write"; }; }'';
       description = mdDoc "Realms (`ou=<realm>,ou=Communities`) with service accounts.";
     };
+
+    globalServices = mkOption {
+      type = types.attrsOf (types.submodule {
+        options.access = mkOption {
+          type = types.enum [ "read" "write" ];
+          default = "read";
+          description = mdDoc "Like a realm service's `access`, but for all realms.";
+        };
+      });
+      default = {};
+      example = literalExpression ''{ stumv.access = "write"; }'';
+      description = mdDoc ''
+        Service accounts working on all realms below `ou=Communities` (also
+        future ones), created as `cn=<name>,ou=Services,${suffix}`. Passwords
+        are stored in `${credentialsDir}/global/<name>`.
+      '';
+    };
   };
 
   config = mkIf cfg.enable {
-    assertions = concatLists (mapAttrsToList (realm: realmCfg: map (name: {
+    assertions = concatMap (scope: map (name: {
       assertion = builtins.match "[a-z0-9-]+" name != null;
-      message = "profiles.openldap.realms.${realm}.services.${name}: use lowercase letters, digits and dashes only.";
-    }) (attrNames realmCfg.services)) cfg.realms);
+      message = "profiles.openldap service account ${name} (${scope.dn}): use lowercase letters, digits and dashes only.";
+    }) (attrNames scope.services)) scopes ++ [{
+      assertion = !(cfg.realms ? global);
+      message = "profiles.openldap.realms.global: the name is reserved for the credentials of global services.";
+    }];
 
     networking.firewall = {
       allowedTCPPorts = [ 80 ];
@@ -290,7 +330,8 @@ in
                 ''to *
                   by dn.exact="${rootPeercred}" manage
                   by * break''
-              ] ++ serviceEntryAcls ++ realmPasswordAcls ++ [
+                serviceEntryAcl
+              ] ++ writerPasswordAcls ++ [
 
                 ''to attrs=userPassword
                   by self write
@@ -300,7 +341,13 @@ in
                 ''to attrs=pwdFailureTime,pwdAccountLockedTime,pwdChangedTime,pwdReset,pwdHistory,pwdLastSuccess
                   by self read
                   by * none''
-              ] ++ realmAcls ++ [
+              ] ++ globalAcls ++ realmAcls ++ [
+                # Only the root entry itself, so services can search from the
+                # suffix (e.g. StuMV looks up entries by entryUUID from there).
+                ''to dn.base="${suffix}"
+                  by dn.regex="${anyServiceRegex}" read
+                  by * break''
+
                 ''to *
                   by dn.regex="${anyServiceRegex}" none
                   by users read''
@@ -359,7 +406,7 @@ in
       ];
     };
 
-    systemd.services.openldap-service-accounts = mkIf (cfg.realms != {}) {
+    systemd.services.openldap-service-accounts = mkIf (cfg.realms != {} || cfg.globalServices != {}) {
       description = "OpenLDAP service accounts";
       wantedBy = [ "multi-user.target" ];
       requires = [ "openldap.service" ];

@@ -5,7 +5,6 @@
     ./collabora
     ./etherpad
     ./hedgedoc
-    ./httpd-php
     ./keycloak
     ./lauti
     ./matrix

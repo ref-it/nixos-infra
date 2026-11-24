@@ -51,7 +51,12 @@
       enable = true;
       allowReboot = true;
       flake = "github:ref-it/nixos-infra";
-      dates = "02:00";
+      dates = "01:00";
+      randomizedDelaySec = "30min";
+      rebootWindow = {
+        lower = "00:30";
+        upper = "02:30";
+      };
     };
 
     services.qemuGuest.enable = true;

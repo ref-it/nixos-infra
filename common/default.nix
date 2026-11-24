@@ -7,6 +7,7 @@
     (inputs.nixpkgs-unstable + "/nixos/modules/services/web-apps/lauti.nix")
 
     ./base-options.nix
+    ./backup.nix
     ./users.nix
 
     ../profiles

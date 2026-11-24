@@ -55,8 +55,7 @@ in
       settings = {
         hostname = cfg.fqdn;
         reverse-proxy-headers = "xforwarded";
-        log-console-level = "debug";
-        log-syslog-level = "debug";
+        log-level = "info";
         features = "transient-users";
       };
     };

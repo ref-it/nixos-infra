@@ -342,6 +342,12 @@ in
                   by self read
                   by * none''
               ] ++ globalAcls ++ realmAcls ++ [
+                # Only the root entry itself, so services can search from the
+                # suffix (e.g. StuMV looks up entries by entryUUID from there).
+                ''to dn.base="${suffix}"
+                  by dn.regex="${anyServiceRegex}" read
+                  by * break''
+
                 ''to *
                   by dn.regex="${anyServiceRegex}" none
                   by users read''

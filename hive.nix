@@ -4,14 +4,11 @@ inputs:
   meta = {
     description = "StuRa Ilmenau nixfiles";
 
-    nixpkgs = import inputs.nixpkgs {
-      system = "x86_64-linux";
-      overlays = [
-        (final: prev: { inherit (import inputs.nixpkgs-unstable { system = prev.stdenv.hostPlatform.system; }) lauti; })
-        (final: prev: { inherit (import inputs.nixpkgs-unstable { system = prev.stdenv.hostPlatform.system; }) pretix; })
-        (final: prev: { inherit (import inputs.nixpkgs-unstable { system = prev.stdenv.hostPlatform.system; }) zammad; })
-      ];
-    };
+    overlays = [
+      (final: prev: let
+        unstable = import inputs.nixpkgs-unstable { inherit (prev.stdenv.hostPlatform) system; };
+      in { inherit (unstable) lauti pretix zammad; })
+    ];
 
     specialArgs = { inherit inputs; };
   };

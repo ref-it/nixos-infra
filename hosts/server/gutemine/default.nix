@@ -53,8 +53,8 @@
       realms.stura.services = {
         nextcloud = {};
         zammad = {};
-        stumv.access = "write";
       };
+      globalServices.stumv.access = "write";
     };
   };
 }

@@ -1,6 +1,8 @@
 keys:
   - &admin_netali F72925946F580B058FB3F2719C55E636426B40A9
   - &admin_schlagma age1ncc0ukuqyeq8uzcvy2x0cymykrmnhzymgk22kvt7dvz99prjsysqjxgz9g
+  - &admin_marco age19wagufqswgk2rskm5emj2p56sw3cwk8c8zcfx99kzwkmyz6669lsdmlksu
+  - &admin_malte age1jq5edf2fwecmdp8mapuhu6fcfxk7pl5kwlxvlam6692c6ucrqgjs4v0qfm
   - &srv_automatix age16ev6z7n6rcruusa98dw9gxyhyh228hsjp4d4f9su4sg3w9fsmymqqv99jt
   - &srv_grautvornix age1570w8z3cdn9ygjjupcyxjjn77g8d4me9s9na3uram5039kljsp3q4jrw0m
   - &srv_griesgramix age1ffcwx499vc35ldxz6ms9rc4t2vus20nsw5kgxsz9e2hqjsg6jfxq2t6zp9
@@ -18,6 +20,8 @@ creation_rules:
       - age:
         - *srv_automatix
         - *admin_schlagma
+        - *admin_marco
+        - *admin_malte
         pgp:
         - *admin_netali
   - path_regex: hosts/server/grautvornix/secrets.yaml$
@@ -25,6 +29,8 @@ creation_rules:
       - age:
         - *srv_grautvornix
         - *admin_schlagma
+        - *admin_marco
+        - *admin_malte
         pgp:
         - *admin_netali
   - path_regex: hosts/server/griesgramix/secrets.yaml$
@@ -32,6 +38,8 @@ creation_rules:
       - age:
         - *srv_griesgramix
         - *admin_schlagma
+        - *admin_marco
+        - *admin_malte
         pgp:
         - *admin_netali
   - path_regex: hosts/server/gutemine/secrets.yaml$
@@ -39,6 +47,8 @@ creation_rules:
       - age:
         - *srv_gutemine
         - *admin_schlagma
+        - *admin_marco
+        - *admin_malte
         pgp:
         - *admin_netali
   - path_regex: hosts/server/idefix/secrets.yaml$
@@ -46,6 +56,8 @@ creation_rules:
       - age:
         - *srv_idefix
         - *admin_schlagma
+        - *admin_marco
+        - *admin_malte
         pgp:
         - *admin_netali
   - path_regex: hosts/server/majestix/secrets.yaml$
@@ -53,6 +65,8 @@ creation_rules:
       - age:
         - *srv_majestix
         - *admin_schlagma
+        - *admin_marco
+        - *admin_malte
         pgp:
         - *admin_netali
   - path_regex: hosts/server/miraculix/secrets.yaml$
@@ -60,6 +74,8 @@ creation_rules:
       - age:
         - *srv_miraculix
         - *admin_schlagma
+        - *admin_marco
+        - *admin_malte
         pgp:
         - *admin_netali
   - path_regex: hosts/server/obelix/secrets.yaml$
@@ -67,6 +83,8 @@ creation_rules:
       - age:
         - *srv_obelix
         - *admin_schlagma
+        - *admin_marco
+        - *admin_malte
         pgp:
         - *admin_netali
   - path_regex: hosts/server/troubadix/secrets.yaml$
@@ -74,6 +92,8 @@ creation_rules:
       - age:
         - *srv_troubadix
         - *admin_schlagma
+        - *admin_marco
+        - *admin_malte
         pgp:
         - *admin_netali
   - path_regex: hosts/server/verliernix/secrets.yaml$
@@ -81,5 +101,7 @@ creation_rules:
       - age:
         - *srv_verliernix
         - *admin_schlagma
+        - *admin_marco
+        - *admin_malte
         pgp:
         - *admin_netali
